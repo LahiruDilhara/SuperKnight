@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://diy1xal6yv46a"]
+
+[ext_resource type="Script" path="res://scripts/KillZone.cs" id="1_aw0na"]
+
+[node name="KillZone" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_aw0na")
+
+[node name="RestartTimer" type="Timer" parent="."]
+one_shot = true

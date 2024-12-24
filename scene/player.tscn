@@ -1,0 +1,207 @@
+[gd_scene load_steps=29 format=3 uid="uid://bxmm025rhtwmi"]
+
+[ext_resource type="Texture2D" uid="uid://88bllxa6gxim" path="res://assets/sprites/knight.png" id="1_1livn"]
+[ext_resource type="Script" path="res://scripts/Player/Player.cs" id="1_4t06a"]
+[ext_resource type="Script" path="res://scripts/Player/StateMachine.cs" id="3_tebu6"]
+[ext_resource type="Script" path="res://scripts/Player/Run.cs" id="4_x3i5t"]
+[ext_resource type="Script" path="res://scripts/Player/Jump.cs" id="5_dht22"]
+[ext_resource type="Script" path="res://scripts/Player/Idle.cs" id="6_3e4c8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db0ke"]
+atlas = ExtResource("1_1livn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5juju"]
+atlas = ExtResource("1_1livn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_av3nq"]
+atlas = ExtResource("1_1livn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnpw3"]
+atlas = ExtResource("1_1livn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7udfc"]
+atlas = ExtResource("1_1livn")
+region = Rect2(64, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fypbt"]
+atlas = ExtResource("1_1livn")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pp53"]
+atlas = ExtResource("1_1livn")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tkw14"]
+atlas = ExtResource("1_1livn")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2ikj"]
+atlas = ExtResource("1_1livn")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_658a7"]
+atlas = ExtResource("1_1livn")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_225xa"]
+atlas = ExtResource("1_1livn")
+region = Rect2(160, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr3ix"]
+atlas = ExtResource("1_1livn")
+region = Rect2(192, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kkw7"]
+atlas = ExtResource("1_1livn")
+region = Rect2(224, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_240xh"]
+atlas = ExtResource("1_1livn")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvch3"]
+atlas = ExtResource("1_1livn")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6vyj"]
+atlas = ExtResource("1_1livn")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4375w"]
+atlas = ExtResource("1_1livn")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn4bg"]
+atlas = ExtResource("1_1livn")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5p2n2"]
+atlas = ExtResource("1_1livn")
+region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsi8e"]
+atlas = ExtResource("1_1livn")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ljnis"]
+atlas = ExtResource("1_1livn")
+region = Rect2(224, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v2s7k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_db0ke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5juju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_av3nq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnpw3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7udfc")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fypbt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8pp53")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tkw14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2ikj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_658a7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_225xa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr3ix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kkw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_240xh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvch3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6vyj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4375w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tn4bg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5p2n2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsi8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ljnis")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 13
+script = ExtResource("1_4t06a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_v2s7k")
+animation = &"jump"
+autoplay = "idle"
+frame_progress = 0.790642
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -6)
+polygon = PackedVector2Array(5, 6, 5, 3, 6, 3, 6, -4, 5, -4, 5, -6, 2, -6, 2, -8, 1, -8, 1, -9, -7, -9, -7, -6, -5, -6, -5, 0, -6, 0, -6, 6)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("3_tebu6")
+initialState = NodePath("idle")
+
+[node name="run" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idel", "Jump")]
+script = ExtResource("4_x3i5t")
+Idel = NodePath("../idle")
+Jump = NodePath("../jump")
+
+[node name="jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idel")]
+script = ExtResource("5_dht22")
+animationName = "jump"
+Idel = NodePath("../idle")
+
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("Run", "Jump")]
+script = ExtResource("6_3e4c8")
+Run = NodePath("../run")
+Jump = NodePath("../jump")
