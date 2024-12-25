@@ -7,10 +7,10 @@ namespace Player
 	{
 
 		[Export]
-		private State Idel;
-
-		[Export]
 		public String AnimationName = "run";
+		
+		[Export]
+		private State Idel;
 		public override void Enter()
 		{
 			Animation?.Play(AnimationName);

@@ -5,11 +5,12 @@ namespace Player
 {
 	public partial class Jump : InAir
 	{
-		[Export]
-		private State Fall;
 
 		[Export]
 		public String AnimationName = "jump";
+
+		[Export]
+		private State Fall;
 
 		public override void Enter()
 		{
@@ -33,7 +34,6 @@ namespace Player
 				ChangeState(Fall);
 				return;
 			}
-
 		}
 	}
 

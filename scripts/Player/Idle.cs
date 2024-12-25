@@ -6,10 +6,11 @@ namespace Player
 	public partial class Idle : OnGround
 	{
 		[Export]
+		public String AnimationName = "idle";
+		
+		[Export]
 		private State Run;
 
-		[Export]
-		public String AnimationName = "idle";
 		public override void Enter()
 		{
 			// set idel animation
