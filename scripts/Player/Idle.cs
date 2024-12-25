@@ -3,7 +3,7 @@ using System;
 
 namespace Player
 {
-	public partial class Idle : State
+	public partial class Idle : OnGround
 	{
 		[Export]
 		private State Run;

@@ -3,7 +3,7 @@ using System;
 
 namespace Player
 {
-	public partial class Jump : State
+	public partial class Jump : InAir
 	{
 		[Export]
 		private State Idel;

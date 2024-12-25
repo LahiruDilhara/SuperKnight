@@ -3,7 +3,7 @@ using System;
 
 namespace Player
 {
-	public partial class Run : State
+	public partial class Run : OnGround
 	{
 
 		[Export]
