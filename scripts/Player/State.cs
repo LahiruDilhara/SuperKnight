@@ -22,17 +22,15 @@ namespace Player
 
 		public InputHandler inputHandler;
 
-		public virtual void Enter() {
+		public virtual void Enter()
+		{
 		}
 
 		public virtual void ProcessUpdate(float delta) { }
 
 		public virtual void InputUpdate(InputEvent @event) { }
 
-		public virtual void PhysicsUpdate(float delta) {
-			var projectionY = this.Gravity * delta;
-			Character.Velocity += new Vector2(y: projectionY, x: 0);
-		}
+		public virtual void PhysicsUpdate(float delta) { }
 
 		public virtual void Exit() { }
 

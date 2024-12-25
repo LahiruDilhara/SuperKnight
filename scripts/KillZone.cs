@@ -30,7 +30,7 @@ public partial class KillZone : Area2D
 			// slow motion the engine when collide
 			Engine.TimeScale = 0.5;
 			// get the player collition object and remove it
-			body.GetNode<CollisionPolygon2D>("CollisionShape2D").QueueFree();
+			body.GetNode<CollisionPolygon2D>("CollisionPolygon2D").QueueFree();
 			RestartTimer.Start();
 		}
 	}

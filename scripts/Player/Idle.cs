@@ -9,14 +9,9 @@ namespace Player
 		private State Run;
 
 		[Export]
-		private State Jump;
-
-		[Export]
 		public String AnimationName = "idle";
 		public override void Enter()
 		{
-			base.Enter();
-			
 			// set idel animation
 			Animation?.Play(AnimationName);
 
@@ -24,22 +19,23 @@ namespace Player
 		}
 		public override void ProcessUpdate(float delta)
 		{
-			base.ProcessUpdate(delta);
-			if (inputHandler.GetMovementDirection() != 0f)
+			if (inputHandler.WantToJump())
+			{
+				ChangeState(Jump);
+				return;
+			}
+			else if (!Character.IsOnFloor())
+			{
+				ChangeState(Fall);
+				return;
+			}
+			else if (inputHandler.GetMovementDirection() != 0f)
 			{
 				ChangeState(Run);
 				return;
 			}
-			if(inputHandler.WantToJump()){
-				ChangeState(Jump);
-				return;
-			}
-			Character.MoveAndSlide();
-		}
 
-		public override void Exit()
-		{
-			base.Exit();
+			Character.MoveAndSlide();
 		}
 	}
 

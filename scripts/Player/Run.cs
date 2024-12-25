@@ -10,31 +10,31 @@ namespace Player
 		private State Idel;
 
 		[Export]
-		private State Jump;
-
-		[Export]
 		public String AnimationName = "run";
 		public override void Enter()
 		{
-			base.Enter();
-
 			Animation?.Play(AnimationName);
 		}
 		public override void ProcessUpdate(float delta)
 		{
-			var VelocityVector = Character.Velocity;
-
-			if(inputHandler.WantToJump()){
-				ChangeState(Jump);
-				return;
-			}
-
-			var direction = inputHandler.GetMovementDirection();
-			if (direction == 0f)
+			if (inputHandler.GetMovementDirection() == 0f)
 			{
 				ChangeState(Idel);
 				return;
 			}
+			else if (inputHandler.WantToJump())
+			{
+				ChangeState(Jump);
+				return;
+			}
+			else if (!Character.IsOnFloor())
+			{
+				ChangeState(Fall);
+				return;
+			}
+			var VelocityVector = Character.Velocity;
+
+			var direction = inputHandler.GetMovementDirection();
 
 			if (direction == -1)
 			{
@@ -48,11 +48,6 @@ namespace Player
 			VelocityVector.X = direction * this.RunSpeed;
 			Character.Velocity = VelocityVector;
 			Character.MoveAndSlide();
-		}
-
-		public override void Exit()
-		{
-			base.Exit();
 		}
 	}
 }
