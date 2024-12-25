@@ -1,5 +1,4 @@
 using Godot;
-using Libs;
 using System;
 
 namespace Player
@@ -12,48 +11,30 @@ namespace Player
 		[Export]
 		private State Jump;
 
-		private Player player;
+		[Export]
+		public String AnimationName = "idle";
 		public override void Enter()
 		{
 			base.Enter();
-			this.player = base.SuperNode as Player;
-
+			
 			// set idel animation
-			Animation?.Play("idle");
+			Animation?.Play(AnimationName);
 
-			this.player.Velocity = new Vector2(x: 0, y: 0);
+			this.Character.Velocity = new Vector2(x: 0, y: 0);
 		}
 		public override void ProcessUpdate(float delta)
 		{
 			base.ProcessUpdate(delta);
-			if (Input.IsActionPressed("left") || Input.IsActionPressed("right"))
+			if (inputHandler.GetMovementDirection() != 0f)
 			{
 				ChangeState(Run);
 				return;
 			}
-			player.MoveAndSlide();
-		}
-
-		public override void PhysicsUpdate(float delta)
-		{
-			base.PhysicsUpdate(delta);
-
-			var projectionY = player.Gravity * delta;
-			player.Velocity += new Vector2(y: projectionY, x: 0);
-		}
-
-		public override void InputUpdate(InputEvent @event)
-		{
-			if ((@event.IsActionPressed("left") || @event.IsActionPressed("right")) && player.IsOnFloor())
-			{
-				ChangeState(Run);
-				return;
-			}
-			else if (@event.IsActionPressed("jump") && player.IsOnFloor())
-			{
+			if(inputHandler.WantToJump()){
 				ChangeState(Jump);
 				return;
 			}
+			Character.MoveAndSlide();
 		}
 
 		public override void Exit()

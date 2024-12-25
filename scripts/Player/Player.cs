@@ -6,27 +6,27 @@ namespace Player
 	public partial class Player : CharacterBody2D
 	{
 		[Export]
-		public float Speed = 150.0f;
+		public int RunSpeed = 150;
 
 		[Export]
-		public float JumpHeight = -400.0f;
+		public int JumpHeight = -400;
 
 		[Export]
-		public float Gravity = 980f;
+		public int Gravity = 980;
 
 		[Export]
-		public float JumpProjectionSpeed = 150f;
+		public int JumpProjectionSpeed = 150;
 
-		public AnimatedSprite2D animation;
+		public AnimatedSprite2D Animation;
 
 		private StateMachine stateMachine;
 
 		public void Init()
 		{
-			this.animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+			this.Animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 			this.stateMachine = GetNode<StateMachine>("StateMachine");
 
-			stateMachine.Init(this, this.animation);
+			stateMachine.Init(character: this, Gravity: Gravity, JumpProjectionSpeed: JumpProjectionSpeed, JumpHeight: JumpHeight, RunSpeed: RunSpeed, Animation: Animation);
 		}
 		public override void _Ready()
 		{

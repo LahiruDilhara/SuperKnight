@@ -1,24 +1,37 @@
 using Godot;
-using Libs;
 using System;
 
 namespace Player
 {
 	public partial class StateMachine : Node
 	{
-		private Node RootNode;
+		private CharacterBody2D Character;
 
 		private AnimatedSprite2D Animation;
 		private State CurrentState = null;
 
+		public int Gravity;
+
+		public int JumpProjectionSpeed;
+
+		public int JumpHeight;
+
+		public int RunSpeed;
+
 		[Export]
 		private State initialState;
 
-		public void Init(Node RootNode,AnimatedSprite2D Animation = null)
-		{
-			this.RootNode = RootNode;
-			this.Animation = Animation;
+		[Export]
+		private InputHandler inputHandler;
 
+		public void Init(CharacterBody2D character, int Gravity = 980, int JumpProjectionSpeed = 200, int JumpHeight = -200, int RunSpeed = 200, AnimatedSprite2D Animation = null)
+		{
+			this.Character = character;
+			this.Gravity = Gravity;
+			this.JumpProjectionSpeed = JumpProjectionSpeed;
+			this.JumpHeight = JumpHeight;
+			this.RunSpeed = RunSpeed;
+			this.Animation = Animation;
 
 			this.CurrentState = initialState;
 			ChangeState(this.initialState);
@@ -28,8 +41,15 @@ namespace Player
 		{
 			this.CurrentState?.Exit();
 			this.CurrentState = state;
-			this.CurrentState.SuperNode = this.RootNode;
+	
+			this.CurrentState.Character = this.Character;
 			this.CurrentState.Animation = this.Animation;
+			this.CurrentState.Gravity = this.Gravity;
+			this.CurrentState.JumpProjectionSpeed = this.JumpProjectionSpeed;
+			this.CurrentState.JumpHeight = this.JumpHeight;
+			this.CurrentState.RunSpeed = this.RunSpeed;
+			this.CurrentState.inputHandler = this.inputHandler;
+
 			this.CurrentState.Enter();
 			if (!this.CurrentState.IsConnected(nameof(this.CurrentState.StateChange), new Callable(this, nameof(this.ChangeState))))
 			{

@@ -1,24 +1,38 @@
 using Godot;
 using System;
 
-namespace Libs
+namespace Player
 {
 	public partial class State : Node
 	{
 		[Signal]
 		public delegate void StateChangeEventHandler(State state);
 
-		public Node SuperNode;
+		public CharacterBody2D Character;
 
 		public AnimatedSprite2D Animation;
 
-		public virtual void Enter() { }
+		public int Gravity;
+
+		public int JumpProjectionSpeed;
+
+		public int JumpHeight;
+
+		public int RunSpeed;
+
+		public InputHandler inputHandler;
+
+		public virtual void Enter() {
+		}
 
 		public virtual void ProcessUpdate(float delta) { }
 
 		public virtual void InputUpdate(InputEvent @event) { }
 
-		public virtual void PhysicsUpdate(float delta) { }
+		public virtual void PhysicsUpdate(float delta) {
+			var projectionY = this.Gravity * delta;
+			Character.Velocity += new Vector2(y: projectionY, x: 0);
+		}
 
 		public virtual void Exit() { }
 

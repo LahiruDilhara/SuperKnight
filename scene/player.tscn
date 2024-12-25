@@ -1,11 +1,16 @@
-[gd_scene load_steps=29 format=3 uid="uid://bxmm025rhtwmi"]
+[gd_scene load_steps=31 format=3 uid="uid://bxmm025rhtwmi"]
 
 [ext_resource type="Texture2D" uid="uid://88bllxa6gxim" path="res://assets/sprites/knight.png" id="1_1livn"]
 [ext_resource type="Script" path="res://scripts/Player/Player.cs" id="1_4t06a"]
+[ext_resource type="Script" path="res://scripts/Player/InputHandler.cs" id="3_sevn4"]
 [ext_resource type="Script" path="res://scripts/Player/StateMachine.cs" id="3_tebu6"]
 [ext_resource type="Script" path="res://scripts/Player/Run.cs" id="4_x3i5t"]
 [ext_resource type="Script" path="res://scripts/Player/Jump.cs" id="5_dht22"]
 [ext_resource type="Script" path="res://scripts/Player/Idle.cs" id="6_3e4c8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fldyf"]
+atlas = ExtResource("1_1livn")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_db0ke"]
 atlas = ExtResource("1_1livn")
@@ -95,6 +100,14 @@ region = Rect2(224, 96, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fldyf")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_db0ke")
 }, {
 "duration": 1.0,
@@ -179,17 +192,20 @@ script = ExtResource("1_4t06a")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_v2s7k")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.790642
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, -6)
 polygon = PackedVector2Array(5, 6, 5, 3, 6, 3, 6, -4, 5, -4, 5, -6, 2, -6, 2, -8, 1, -8, 1, -9, -7, -9, -7, -6, -5, -6, -5, 0, -6, 0, -6, 6)
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+[node name="InputHandler" type="Node" parent="."]
+script = ExtResource("3_sevn4")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "inputHandler")]
 script = ExtResource("3_tebu6")
 initialState = NodePath("idle")
+inputHandler = NodePath("../InputHandler")
 
 [node name="run" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idel", "Jump")]
 script = ExtResource("4_x3i5t")
@@ -198,7 +214,6 @@ Jump = NodePath("../jump")
 
 [node name="jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idel")]
 script = ExtResource("5_dht22")
-animationName = "jump"
 Idel = NodePath("../idle")
 
 [node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("Run", "Jump")]

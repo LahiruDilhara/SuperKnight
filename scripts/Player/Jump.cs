@@ -1,40 +1,37 @@
 using Godot;
-using Libs;
 using System;
 
 namespace Player
 {
 	public partial class Jump : State
 	{
-		private Player player;
-
 		[Export]
 		private State Idel;
+
+		[Export]
+		public String AnimationName = "jump";
 
 		public override void Enter()
 		{
 			base.Enter();
 
-			// Cast the Node to Player
-			this.player = base.SuperNode as Player;
-
 			// set jump animation
-			Animation?.Play("jump");
+			Animation?.Play(AnimationName);
 
 			// set jump velocity
-			player.Velocity += new Vector2(x: 0, y: player.JumpHeight);
-			player.MoveAndSlide();
+			Character.Velocity += new Vector2(x: 0, y: this.JumpHeight);
+			Character.MoveAndSlide();
 		}
 		public override void ProcessUpdate(float delta)
 		{
 			base.ProcessUpdate(delta);
 
-			var VelocityVector = player.Velocity;
+			var VelocityVector = Character.Velocity;
 
-			var direction = Input.GetAxis("left", "right");
+			var direction = inputHandler.GetMovementDirection();
 
-			// change to idel if the player hit ground
-			if (player.IsOnFloor())
+			// change to idel if the Character hit ground
+			if (Character.IsOnFloor())
 			{
 				ChangeState(Idel);
 				return;
@@ -42,24 +39,17 @@ namespace Player
 
 			if (direction == -1)
 			{
-				player.animation.FlipH = true;
+				this.Animation.FlipH = true;
 			}
 			else if (direction == 1)
 			{
-				player.animation.FlipH = false;
+				this.Animation.FlipH = false;
 			}
 
-			VelocityVector.X = direction * player.JumpProjectionSpeed;
+			VelocityVector.X = direction * this.JumpProjectionSpeed;
 
-			player.Velocity = VelocityVector;
-			player.MoveAndSlide();
-		}
-
-		public override void PhysicsUpdate(float delta)
-		{
-			base.PhysicsUpdate(delta);
-			var projectionY = player.Gravity * delta;
-			player.Velocity += new Vector2(y: projectionY, x: 0);
+			Character.Velocity = VelocityVector;
+			Character.MoveAndSlide();
 		}
 
 		public override void Exit()
