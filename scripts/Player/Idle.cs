@@ -7,12 +7,13 @@ namespace Player
 	{
 		[Export]
 		public String AnimationName = "idle";
-		
+
 		[Export]
 		private State Run;
 
 		public override void Enter()
 		{
+			GD.Print("Idle State");
 			// set idel animation
 			Animation?.Play(AnimationName);
 
@@ -25,18 +26,16 @@ namespace Player
 				ChangeState(Jump);
 				return;
 			}
-			else if (!Character.IsOnFloor())
-			{
-				ChangeState(Fall);
-				return;
-			}
 			else if (inputHandler.GetMovementDirection() != 0f)
 			{
 				ChangeState(Run);
 				return;
 			}
-
-			Character.MoveAndSlide();
+			else if (!Character.IsOnFloor())
+			{
+				ChangeState(Fall);
+				return;
+			}
 		}
 	}
 

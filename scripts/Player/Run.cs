@@ -8,21 +8,20 @@ namespace Player
 
 		[Export]
 		public String AnimationName = "run";
-		
+
+		[Export]
+		public int RunSpeed = 80;
+
 		[Export]
 		private State Idel;
 		public override void Enter()
 		{
+			GD.Print("Run State");
 			Animation?.Play(AnimationName);
 		}
 		public override void ProcessUpdate(float delta)
 		{
-			if (inputHandler.GetMovementDirection() == 0f)
-			{
-				ChangeState(Idel);
-				return;
-			}
-			else if (inputHandler.WantToJump())
+			if (inputHandler.WantToJump())
 			{
 				ChangeState(Jump);
 				return;
@@ -30,6 +29,11 @@ namespace Player
 			else if (!Character.IsOnFloor())
 			{
 				ChangeState(Fall);
+				return;
+			}
+			else if (inputHandler.GetMovementDirection() == 0f)
+			{
+				ChangeState(Idel);
 				return;
 			}
 			var VelocityVector = Character.Velocity;

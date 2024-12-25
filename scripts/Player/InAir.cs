@@ -7,7 +7,14 @@ namespace Player
     {
 
         [Export]
+        public int Gravity = 980;
+
+        [Export]
+		public int InAirProjectionSpeed = 150;
+
+        [Export]
         protected State Idle;
+
         public override void PhysicsUpdate(float delta)
         {
             var projectionY = this.Gravity * delta;
@@ -30,7 +37,7 @@ namespace Player
                 this.Animation.FlipH = false;
             }
 
-            VelocityVector.X = direction * this.JumpProjectionSpeed;
+            VelocityVector.X = direction * this.InAirProjectionSpeed;
 
             Character.Velocity = VelocityVector;
             Character.MoveAndSlide();

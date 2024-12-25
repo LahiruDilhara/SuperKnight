@@ -190,7 +190,6 @@ animations = [{
 collision_mask = 13
 script = ExtResource("1_4t06a")
 RunSpeed = 100
-JumpProjectionSpeed = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
@@ -211,6 +210,7 @@ inputHandler = NodePath("../InputHandler")
 
 [node name="run" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idel", "Fall", "Jump")]
 script = ExtResource("4_x3i5t")
+RunSpeed = 60
 Idel = NodePath("../idle")
 Fall = NodePath("../fall")
 Jump = NodePath("../jump")
@@ -223,9 +223,14 @@ Jump = NodePath("../jump")
 
 [node name="fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idle")]
 script = ExtResource("8_6oski")
+Gravity = 500
+InAirProjectionSpeed = 80
 Idle = NodePath("../idle")
 
 [node name="jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("Fall", "Idle")]
 script = ExtResource("5_dht22")
+JumpVelocity = 180
 Fall = NodePath("../fall")
+Gravity = 500
+InAirProjectionSpeed = 80
 Idle = NodePath("../idle")

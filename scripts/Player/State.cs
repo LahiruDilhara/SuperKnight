@@ -12,14 +12,6 @@ namespace Player
 
 		public AnimatedSprite2D Animation;
 
-		public int Gravity;
-
-		public int JumpProjectionSpeed;
-
-		public int JumpHeight;
-
-		public int RunSpeed;
-
 		public InputHandler inputHandler;
 
 		public virtual void Enter()

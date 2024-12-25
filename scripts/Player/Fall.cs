@@ -10,6 +10,7 @@ public partial class Fall : InAir
 
 	public override void Enter()
 	{
+		GD.Print("Fall State");
 		// set idel animation
 		Animation?.Play(AnimationName);
 	}

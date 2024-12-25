@@ -11,12 +11,6 @@ namespace Player
 		[Export]
 		public int JumpHeight = -400;
 
-		[Export]
-		public int Gravity = 980;
-
-		[Export]
-		public int JumpProjectionSpeed = 150;
-
 		public AnimatedSprite2D Animation;
 
 		private StateMachine stateMachine;
@@ -26,7 +20,7 @@ namespace Player
 			this.Animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 			this.stateMachine = GetNode<StateMachine>("StateMachine");
 
-			stateMachine.Init(character: this, Gravity: Gravity, JumpProjectionSpeed: JumpProjectionSpeed, JumpHeight: JumpHeight, RunSpeed: RunSpeed, Animation: Animation);
+			stateMachine.Init(character: this, Animation: Animation);
 		}
 		public override void _Ready()
 		{
