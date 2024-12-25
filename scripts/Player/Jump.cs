@@ -9,9 +9,6 @@ namespace Player
 		private Player player;
 
 		[Export]
-		private string animationName = null;
-
-		[Export]
 		private State Idel;
 
 		public override void Enter()
@@ -22,10 +19,7 @@ namespace Player
 			this.player = base.SuperNode as Player;
 
 			// set jump animation
-			if (animationName != null)
-			{
-				this.player.animation.Play(animationName);
-			}
+			Animation?.Play("jump");
 
 			// set jump velocity
 			player.Velocity += new Vector2(x: 0, y: player.JumpHeight);

@@ -17,8 +17,6 @@ namespace Player
 		[Export]
 		public float JumpProjectionSpeed = 150f;
 
-
-
 		public AnimatedSprite2D animation;
 
 		private StateMachine stateMachine;
@@ -28,7 +26,7 @@ namespace Player
 			this.animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 			this.stateMachine = GetNode<StateMachine>("StateMachine");
 
-			stateMachine.Init(this);
+			stateMachine.Init(this, this.animation);
 		}
 		public override void _Ready()
 		{

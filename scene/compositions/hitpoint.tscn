@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf8etax2scmb0"]
+
+[ext_resource type="Script" path="res://scripts/compositions/Hitpoint.cs" id="1_xhodl"]
+
+[node name="Hitpoint" type="Node"]
+script = ExtResource("1_xhodl")

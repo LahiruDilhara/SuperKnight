@@ -10,6 +10,8 @@ namespace Libs
 
 		public Node SuperNode;
 
+		public AnimatedSprite2D Animation;
+
 		public virtual void Enter() { }
 
 		public virtual void ProcessUpdate(float delta) { }

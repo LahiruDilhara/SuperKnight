@@ -19,7 +19,7 @@ namespace Player
 			this.player = base.SuperNode as Player;
 
 			// set idel animation
-			this.player.animation.Play("idle");
+			Animation?.Play("idle");
 
 			this.player.Velocity = new Vector2(x: 0, y: 0);
 		}

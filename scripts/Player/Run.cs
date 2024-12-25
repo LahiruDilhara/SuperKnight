@@ -21,7 +21,7 @@ namespace Player
 			// Cast the Node to Player
 			this.player = base.SuperNode as Player;
 
-			this.player.animation.Play("run");
+			Animation?.Play("run");
 		}
 		public override void ProcessUpdate(float delta)
 		{
@@ -69,5 +69,4 @@ namespace Player
 			base.Exit();
 		}
 	}
-
 }

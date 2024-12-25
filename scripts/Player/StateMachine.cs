@@ -6,15 +6,20 @@ namespace Player
 {
 	public partial class StateMachine : Node
 	{
-		private Node rootNode;
+		private Node RootNode;
+
+		private AnimatedSprite2D Animation;
 		private State CurrentState = null;
 
 		[Export]
 		private State initialState;
 
-		public void Init(Node rootNode)
+		public void Init(Node RootNode,AnimatedSprite2D Animation = null)
 		{
-			this.rootNode = rootNode;
+			this.RootNode = RootNode;
+			this.Animation = Animation;
+
+
 			this.CurrentState = initialState;
 			ChangeState(this.initialState);
 		}
@@ -23,7 +28,8 @@ namespace Player
 		{
 			this.CurrentState?.Exit();
 			this.CurrentState = state;
-			this.CurrentState.SuperNode = this.rootNode;
+			this.CurrentState.SuperNode = this.RootNode;
+			this.CurrentState.Animation = this.Animation;
 			this.CurrentState.Enter();
 			if (!this.CurrentState.IsConnected(nameof(this.CurrentState.StateChange), new Callable(this, nameof(this.ChangeState))))
 			{
