@@ -19,6 +19,7 @@ namespace Compositions
 		public override void _Ready()
 		{
 			this.BodyEntered += OnBodyEntered;
+			this.Removable = GetParent();
 		}
 
 		private void OnBodyEntered(Node2D body)
@@ -27,13 +28,11 @@ namespace Compositions
 			{
 				if (body.GetType() == NodeType)
 				{
-					GD.Print("Called with specific node");
 					EmitAndRemoveHandle(body);
 				}
 			}
 			else
 			{
-				GD.Print("Called this");
 				EmitAndRemoveHandle(body);
 			}
 		}

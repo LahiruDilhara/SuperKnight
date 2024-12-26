@@ -16,7 +16,6 @@ namespace Player
 		private State Idel;
 		public override void Enter()
 		{
-			GD.Print("Run State");
 			Animation?.Play(AnimationName);
 		}
 		public override void ProcessUpdate(float delta)

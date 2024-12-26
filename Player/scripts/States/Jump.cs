@@ -36,7 +36,6 @@ namespace Player
 
 		public override void Enter()
 		{
-			GD.Print("Jump State");
 			// set jump animation
 			Animation?.Play(AnimationName);
 

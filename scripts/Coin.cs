@@ -23,8 +23,5 @@ public partial class Coin : Node2D
 	private void CoinCollectCallable(Node2D body)
 	{
 		GD.Print("Call the callable in coin");
-		// Global.increaseScore();
-		// GD.Print(body.GetType());
-		// this.QueueFree();
 	}
 }

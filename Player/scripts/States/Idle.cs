@@ -13,7 +13,6 @@ namespace Player
 
 		public override void Enter()
 		{
-			GD.Print("Idle State");
 			// set idel animation
 			Animation?.Play(AnimationName);
 

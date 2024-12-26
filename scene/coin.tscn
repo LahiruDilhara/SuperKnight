@@ -106,10 +106,9 @@ script = ExtResource("1_pyqbq")
 sprite_frames = SubResource("SpriteFrames_rnqc3")
 autoplay = "default"
 
-[node name="Pickable" parent="." node_paths=PackedStringArray("Removable") instance=ExtResource("3_ykact")]
+[node name="Pickable" parent="." instance=ExtResource("3_ykact")]
 position = Vector2(0, -1)
 RemoveOnPick = true
-Removable = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickable"]
 position = Vector2(0, 1)
