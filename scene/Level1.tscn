@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://gq6cvi4fephq" path="res://scene/platform.tscn" id="2_bwxh6"]
 [ext_resource type="PackedScene" uid="uid://deyfnevy3byu" path="res://scene/coin.tscn" id="3_5k3qt"]
 [ext_resource type="PackedScene" uid="uid://diy1xal6yv46a" path="res://scene/kill_zone.tscn" id="4_jtl16"]
-[ext_resource type="PackedScene" uid="uid://bxmm025rhtwmi" path="res://scene/player.tscn" id="5_eauda"]
+[ext_resource type="PackedScene" uid="uid://bxmm025rhtwmi" path="res://Player/player.tscn" id="5_eauda"]
 [ext_resource type="PackedScene" uid="uid://d2gxiq47dys5k" path="res://scene/game_status.tscn" id="6_7a3c1"]
 [ext_resource type="PackedScene" uid="uid://b8h1ntnsvbxl1" path="res://scene/slime_green.tscn" id="7_l8pim"]
 

@@ -1,13 +1,13 @@
 [gd_scene load_steps=32 format=3 uid="uid://bxmm025rhtwmi"]
 
 [ext_resource type="Texture2D" uid="uid://88bllxa6gxim" path="res://assets/sprites/knight.png" id="1_1livn"]
-[ext_resource type="Script" path="res://scripts/Player/Player.cs" id="1_4t06a"]
-[ext_resource type="Script" path="res://scripts/Player/InputHandler.cs" id="3_sevn4"]
-[ext_resource type="Script" path="res://scripts/Player/StateMachine.cs" id="3_tebu6"]
-[ext_resource type="Script" path="res://scripts/Player/Run.cs" id="4_x3i5t"]
-[ext_resource type="Script" path="res://scripts/Player/Jump.cs" id="5_dht22"]
-[ext_resource type="Script" path="res://scripts/Player/Idle.cs" id="6_3e4c8"]
-[ext_resource type="Script" path="res://scripts/Player/Fall.cs" id="8_6oski"]
+[ext_resource type="Script" path="res://Player/scripts/Player.cs" id="1_4t06a"]
+[ext_resource type="Script" path="res://Player/scripts/States/InputHandler.cs" id="3_sevn4"]
+[ext_resource type="Script" path="res://Player/scripts/States/StateMachine.cs" id="3_tebu6"]
+[ext_resource type="Script" path="res://Player/scripts/States/Run.cs" id="5_cx7sp"]
+[ext_resource type="Script" path="res://Player/scripts/States/Idle.cs" id="6_0gvey"]
+[ext_resource type="Script" path="res://Player/scripts/States/Fall.cs" id="7_36222"]
+[ext_resource type="Script" path="res://Player/scripts/States/Jump.cs" id="8_rsexn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fldyf"]
 atlas = ExtResource("1_1livn")
@@ -209,26 +209,26 @@ initialState = NodePath("idle")
 inputHandler = NodePath("../InputHandler")
 
 [node name="run" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idel", "Fall", "Jump")]
-script = ExtResource("4_x3i5t")
+script = ExtResource("5_cx7sp")
 RunSpeed = 60
 Idel = NodePath("../idle")
 Fall = NodePath("../fall")
 Jump = NodePath("../jump")
 
 [node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("Run", "Fall", "Jump")]
-script = ExtResource("6_3e4c8")
+script = ExtResource("6_0gvey")
 Run = NodePath("../run")
 Fall = NodePath("../fall")
 Jump = NodePath("../jump")
 
 [node name="fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idle")]
-script = ExtResource("8_6oski")
+script = ExtResource("7_36222")
 Gravity = 500
 InAirProjectionSpeed = 80
 Idle = NodePath("../idle")
 
 [node name="jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("Fall", "Idle")]
-script = ExtResource("5_dht22")
+script = ExtResource("8_rsexn")
 JumpVelocity = 180
 Fall = NodePath("../fall")
 Gravity = 500

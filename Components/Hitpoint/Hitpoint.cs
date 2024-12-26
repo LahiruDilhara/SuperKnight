@@ -3,7 +3,7 @@ using System;
 
 namespace Compositions
 {
-	public partial class Hitpoint : Node
+	public partial class Hitpoint : Node2D
 	{
 		[Signal]
 		public delegate void HitpointChangeEventHandler(int hitpoint);
