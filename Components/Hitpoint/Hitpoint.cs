@@ -11,23 +11,34 @@ namespace Compositions
 		[Signal]
 		public delegate void DiedEventHandler();
 
+		private int _MaxHitpoints = 0;
+
+		private int _CurrentHitpoints = 0;
+
 		[Export]
 		public int MaxHitpoints
 		{
-			get => MaxHitpoints;
+			get => _MaxHitpoints;
 			private set
 			{
-				MaxHitpoints = value;
+				_MaxHitpoints = value;
+
+				// Update the current hitpoints to ensure it stays within bounds
+				CurrentHitpoints = _CurrentHitpoints;
 			}
 		}
 
 		public int CurrentHitpoints
 		{
-			get => CurrentHitpoints;
+			get => _CurrentHitpoints;
 			private set
 			{
-				CurrentHitpoints = Mathf.Clamp(value, 0, MaxHitpoints);
-				EmitSignal(SignalName.HitpointChange, CurrentHitpoints);
+				int newValue = Mathf.Clamp(value, 0, _MaxHitpoints);
+				if (newValue == _CurrentHitpoints) return;          // Avoid unnecessary updates
+				this._CurrentHitpoints = newValue;
+
+				// Emit the hitpoint change signal
+				EmitSignal(SignalName.HitpointChange, _CurrentHitpoints);
 				if (!HasHealthRemaining && !hasDied)
 				{
 					hasDied = true;
@@ -38,9 +49,12 @@ namespace Compositions
 
 		private bool hasDied;
 
+		[Export]
+		private bool isImmuned = false;
+
 		public bool IsDamaged => CurrentHitpoints < MaxHitpoints;
 
-		public bool HasHealthRemaining => !Mathf.IsEqualApprox(CurrentHitpoints, 0);
+		public bool HasHealthRemaining => CurrentHitpoints > 0;
 
 		public override void _Ready()
 		{
@@ -49,12 +63,18 @@ namespace Compositions
 
 		public void Damage(int damage)
 		{
+			if (isImmuned) return;
 			this.CurrentHitpoints -= damage;
 		}
 
 		public void Heal(int hitpoints)
 		{
 			this.CurrentHitpoints += hitpoints;
+		}
+
+		public void HealToMax()
+		{
+			this.CurrentHitpoints += MaxHitpoints;
 		}
 
 		public void SetMaxHitpoints(int hitpoints)
@@ -65,6 +85,11 @@ namespace Compositions
 		public void InitializeHitpoints()
 		{
 			this.CurrentHitpoints = MaxHitpoints;
+		}
+
+		public void DeadInstantly()
+		{
+			this.CurrentHitpoints -= MaxHitpoints;
 		}
 	}
 

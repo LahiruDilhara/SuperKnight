@@ -1,3 +1,4 @@
+using Compositions;
 using Godot;
 using System;
 
@@ -15,17 +16,20 @@ namespace Player
 
 		private StateMachine stateMachine;
 
+		private Hitpoint hitpoint;
+
 		public void Init()
 		{
 			this.Animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 			this.stateMachine = GetNode<StateMachine>("StateMachine");
+			this.hitpoint = GetNode<Hitpoint>("Hitpoint");
 
-			stateMachine.Init(character: this, Animation: Animation);
 		}
 		public override void _Ready()
 		{
 			base._Ready();
 			Init();
+			stateMachine.Init(character: this, Animation: Animation);
 		}
 
 		public override void _PhysicsProcess(double delta)
@@ -42,7 +46,6 @@ namespace Player
 		{
 			this.stateMachine.Input(@event);
 		}
-
 	}
 
 }
