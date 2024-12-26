@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-namespace Compositions
+namespace Components
 {
 	public partial class Pickable : Area2D
 	{
