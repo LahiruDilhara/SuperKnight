@@ -3,44 +3,48 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class InstantDelayDamage : InstantDamage
+namespace Components
 {
-	private Timer timer;
-
-	private readonly Dictionary<Hitbox, Timer> HitBoxes = new Dictionary<Hitbox, Timer>();
-
-	[Export]
-	private int DelaySeconds = 10;
-
-	protected override void OnAreaEntered(Area2D area)
+	public partial class InstantDelayDamage : InstantDamage
 	{
-		if (area is not Hitbox) return;
-		var hitbox = area as Hitbox;
+		private Timer timer;
 
-		if (HitBoxes.ContainsKey(hitbox)) return;
+		private readonly Dictionary<Hitbox, Timer> HitBoxes = new Dictionary<Hitbox, Timer>();
 
-		Timer timer = new Timer
+		[Export]
+		private int DelaySeconds = 10;
+
+		protected override void OnAreaEntered(Area2D area)
 		{
-			OneShot = true,
-			WaitTime = DelaySeconds
-		};
+			if (area is not Hitbox) return;
+			var hitbox = area as Hitbox;
 
-		// Add the timer as sub node
-		AddChild(timer);
+			if (HitBoxes.ContainsKey(hitbox)) return;
 
-		timer.Timeout += () => OnDelayOver(timer, hitbox);
+			Timer timer = new Timer
+			{
+				OneShot = true,
+				WaitTime = DelaySeconds
+			};
 
-		// Start the timer
-		timer.Start();
+			// Add the timer as sub node
+			AddChild(timer);
 
-		// Store the Area2D and Hitbox
-		HitBoxes.Add(hitbox, timer);
+			timer.Timeout += () => OnDelayOver(timer, hitbox);
+
+			// Start the timer
+			timer.Start();
+
+			// Store the Area2D and Hitbox
+			HitBoxes.Add(hitbox, timer);
+		}
+
+		private void OnDelayOver(Timer timer, Hitbox hitbox)
+		{
+			Attack(hitbox);
+			HitBoxes.Remove(hitbox);
+			timer.QueueFree();
+		}
 	}
 
-	private void OnDelayOver(Timer timer, Hitbox hitbox)
-	{
-		Attack(hitbox);
-		HitBoxes.Remove(hitbox);
-		timer.QueueFree();
-	}
 }
