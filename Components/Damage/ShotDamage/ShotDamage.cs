@@ -2,17 +2,41 @@ using Components;
 using Godot;
 using System;
 
-public partial class ShotDamage : Damage
+namespace Components
 {
-	[Export]
-	private int Amount = 0;
-
-	protected override void Attack(Hitbox hitbox)
+	public partial class ShotDamage : Damage
 	{
+		[Export]
+		private int Amount = 0;
 
+		[Export]
+		private bool OnEnter = true;
+
+		[Export]
+		private bool OnExit = false;
+
+		protected override void Attack(Hitbox hitbox)
+		{
+			if (!IsDamagable(hitbox)) return;
+			int damageAmount = hitbox.Damage(Amount);
+			EmitSignal(nameof(OnAreaDamage), damageAmount);
+		}
+
+		protected override void OnAreaEntered(Area2D area)
+		{
+			if (area is Hitbox hitbox && OnEnter)
+			{
+				Attack(hitbox);
+			}
+		}
+
+		protected override void OnAreaExited(Area2D area)
+		{
+			if (area is Hitbox hitbox && OnExit)
+			{
+				Attack(hitbox);
+			}
+		}
 	}
 
-    protected override void OnAreaEntered(Area2D area)
-    {
-    }
 }

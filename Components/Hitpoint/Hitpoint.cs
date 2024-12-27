@@ -68,10 +68,12 @@ namespace Components
 			this.CurrentHitpoints = MaxHitpoints;
 		}
 
-		public void Damage(int damage)
+		public int Damage(int damage)
 		{
-			if (isImmuned) return;
+			if (isImmuned) return 0;
+			int damageAmount = (this.CurrentHitpoints < damage) ? CurrentHitpoints : damage;
 			this.CurrentHitpoints -= damage;
+			return damageAmount;
 		}
 
 		public void Heal(int hitpoints)

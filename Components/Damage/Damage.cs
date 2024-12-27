@@ -26,6 +26,7 @@ namespace Components
 
         protected bool IsDamagable(Hitbox hitbox)
         {
+            if (hitbox == null) return false;
             if (hitbox.IsDead) return false;
 
             foreach (String unDamagableLayer in UnDamagableLayers)

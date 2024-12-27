@@ -32,9 +32,9 @@ namespace Components
 		public int Damage(int amount)
 		{
 			if (_DamageImmuned) return 0;
-			this.Hitpoint.Damage(amount);
-			EmitSignal(nameof(this.GetDamage), amount);
-			return amount;
+			int actualDamagedAmount = this.Hitpoint.Damage(amount);
+			EmitSignal(nameof(this.GetDamage), actualDamagedAmount);
+			return actualDamagedAmount;
 		}
 
 		public int InstantDamage()
