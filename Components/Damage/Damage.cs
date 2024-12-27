@@ -7,6 +7,10 @@ namespace Components
 {
     abstract public partial class Damage : Area2D
     {
+
+        [Signal]
+        public delegate void OnAreaDamageEventHandler(Area2D area2D, int amount);
+
         public List<String> DamagableLayers = new List<String>();
         public List<String> UnDamagableLayers = new List<String>();
 
