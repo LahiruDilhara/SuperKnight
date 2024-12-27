@@ -4,10 +4,6 @@ using System;
 
 public partial class InstantDamage : Damage
 {
-	public override void _Ready()
-	{
-		AreaEntered += OnAreaEntered;
-	}
 
 	protected override void Attack(Hitbox hitbox)
 	{

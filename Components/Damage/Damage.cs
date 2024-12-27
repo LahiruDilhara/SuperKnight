@@ -14,8 +14,13 @@ namespace Components
         public List<String> DamagableLayers = new List<String>();
         public List<String> UnDamagableLayers = new List<String>();
 
-        abstract protected void Attack(Hitbox hitbox);
+        public override void _Ready()
+        {
+            AreaEntered += OnAreaEntered;
+            AreaExited += OnAreaExited;
+        }
 
+        abstract protected void Attack(Hitbox hitbox);
         protected virtual void OnAreaEntered(Area2D area) { }
         protected virtual void OnAreaExited(Area2D area) { }
 

@@ -406,6 +406,7 @@ position = Vector2(1006, 127)
 position = Vector2(541, -17)
 
 [node name="InstantDelayDamage" parent="." instance=ExtResource("9_e0c07")]
+DelaySeconds = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InstantDelayDamage"]
 position = Vector2(135, 19)
