@@ -27,6 +27,8 @@ namespace Components
 
 		public override void _Ready() { }
 
+		public bool IsDead => Hitpoint.IsDied;
+
 		public void Damage(int amount)
 		{
 			if (_DamageImmuned) return;
@@ -34,13 +36,14 @@ namespace Components
 			EmitSignal(nameof(this.GetDamage), amount);
 		}
 
-		public void InstantDamage()
+		public int InstantDamage()
 		{
-			if (_InstantDamageImmuned) return;
-			int maxDamage = Hitpoint.MaxHitpoints;
-			this.Hitpoint.DeadInstantly();
-			EmitSignal(nameof(this.GetDamage), maxDamage);
+			if (_InstantDamageImmuned) return 0;
+			int damage = this.Hitpoint.DeadInstantly();
+			EmitSignal(nameof(this.GetDamage), damage);
+			return damage;
 		}
+
 
 		/*
 			var area = new Hitbox();

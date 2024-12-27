@@ -47,7 +47,7 @@ namespace Components
 			}
 		}
 
-		private bool hasDied;
+		private bool hasDied = false;
 
 		[Export]
 		private bool isImmuned = false;
@@ -56,9 +56,16 @@ namespace Components
 
 		public bool HasHealthRemaining => CurrentHitpoints > 0;
 
+		public bool IsDied => hasDied;
+
 		public override void _Ready()
 		{
 			this.CurrentHitpoints = this.MaxHitpoints;
+		}
+
+		public void InitializeHitpoints()
+		{
+			this.CurrentHitpoints = MaxHitpoints;
 		}
 
 		public void Damage(int damage)
@@ -82,14 +89,11 @@ namespace Components
 			this.MaxHitpoints = hitpoints;
 		}
 
-		public void InitializeHitpoints()
+		public int DeadInstantly()
 		{
-			this.CurrentHitpoints = MaxHitpoints;
-		}
-
-		public void DeadInstantly()
-		{
+			int temp = this.CurrentHitpoints;
 			this.CurrentHitpoints -= MaxHitpoints;
+			return temp;
 		}
 	}
 
