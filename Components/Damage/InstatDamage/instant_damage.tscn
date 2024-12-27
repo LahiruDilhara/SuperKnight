@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8wfhqjs46log"]
+
+[ext_resource type="Script" path="res://Components/Damage/InstatDamage/InstantDamage.cs" id="1_gxcq8"]
+
+[node name="InstantDamage" type="Area2D"]
+script = ExtResource("1_gxcq8")

@@ -24,6 +24,9 @@ namespace Player
 			this.stateMachine = GetNode<StateMachine>("StateMachine");
 			this.hitpoint = GetNode<Hitpoint>("Hitpoint");
 
+
+			this.hitpoint.HitpointChange += HitpointChange;
+			hitpoint.Died += Dead;
 		}
 		public override void _Ready()
 		{
@@ -45,6 +48,16 @@ namespace Player
 		public override void _Input(InputEvent @event)
 		{
 			this.stateMachine.Input(@event);
+		}
+
+		public void HitpointChange(int hitpoints)
+		{
+			GD.Print($"The hitpoints are {hitpoints}");
+		}
+
+		public void Dead()
+		{
+			GD.Print($"The player over");
 		}
 	}
 
