@@ -29,11 +29,12 @@ namespace Components
 
 		public bool IsDead => Hitpoint.IsDied;
 
-		public void Damage(int amount)
+		public int Damage(int amount)
 		{
-			if (_DamageImmuned) return;
+			if (_DamageImmuned) return 0;
 			this.Hitpoint.Damage(amount);
 			EmitSignal(nameof(this.GetDamage), amount);
+			return amount;
 		}
 
 		public int InstantDamage()

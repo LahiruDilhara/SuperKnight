@@ -11,7 +11,9 @@ public partial class InstantDamage : Damage
 
 	protected override void Attack(Hitbox hitbox)
 	{
-		hitbox.InstantDamage();
+		if (!IsDamagable(hitbox)) return;
+		int damage = hitbox?.InstantDamage() ?? 0;
+		EmitSignal(nameof(OnAreaDamage), damage);
 	}
 
 	protected override void OnAreaEntered(Area2D area)

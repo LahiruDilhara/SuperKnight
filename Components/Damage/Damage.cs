@@ -9,7 +9,7 @@ namespace Components
     {
 
         [Signal]
-        public delegate void OnAreaDamageEventHandler(Area2D area2D, int amount);
+        public delegate void OnAreaDamageEventHandler(int amount);
 
         public List<String> DamagableLayers = new List<String>();
         public List<String> UnDamagableLayers = new List<String>();
@@ -19,8 +19,10 @@ namespace Components
         protected virtual void OnAreaEntered(Area2D area) { }
         protected virtual void OnAreaExited(Area2D area) { }
 
-        private bool IsDamagable(Hitbox hitbox)
+        protected bool IsDamagable(Hitbox hitbox)
         {
+            if (hitbox.IsDead) return false;
+
             foreach (String unDamagableLayer in UnDamagableLayers)
             {
                 if (hitbox.Layer == unDamagableLayer) return false;

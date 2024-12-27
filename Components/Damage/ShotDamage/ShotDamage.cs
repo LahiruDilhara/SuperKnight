@@ -11,4 +11,8 @@ public partial class ShotDamage : Damage
 	{
 
 	}
+
+    protected override void OnAreaEntered(Area2D area)
+    {
+    }
 }
