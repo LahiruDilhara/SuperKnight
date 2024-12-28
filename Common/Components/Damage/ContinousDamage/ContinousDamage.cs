@@ -11,7 +11,7 @@ public partial class ContinousDamage : ShotDamage
 	[Export]
 	private int Incremental = 0;
 
-	private Dictionary<Hitbox, int> Hitboxes = new Dictionary<Hitbox, int>();
+	protected Dictionary<Hitbox, int> Hitboxes = new Dictionary<Hitbox, int>();
 
 	private Timer GlobalTimer;
 

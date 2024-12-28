@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c46e72wq3y6qk"]
 
-[ext_resource type="Script" path="res://Components/Damage/RepeatShotDamage/RepeatShotDamage.cs" id="1_hy1ca"]
+[ext_resource type="Script" path="res://Common/Components/Damage/RepeatShotDamage/RepeatShotDamage.cs" id="1_hy1ca"]
 
 [node name="RepeatShotDamage" type="Area2D"]
 script = ExtResource("1_hy1ca")
