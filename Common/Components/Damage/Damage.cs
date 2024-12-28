@@ -11,6 +11,9 @@ namespace Components
         [Signal]
         public delegate void OnAreaDamageEventHandler(int amount);
 
+        [Export]
+        protected bool DoDamage = true;
+
         public List<String> DamagableLayers = new List<String>();
         public List<String> UnDamagableLayers = new List<String>();
 
@@ -28,7 +31,7 @@ namespace Components
 
         protected bool IsDamagable(Hitbox hitbox)
         {
-            if (hitbox == null) return false;
+            if (hitbox == null || !DoDamage) return false;
             if (hitbox.IsDead || !IsInstanceValid(hitbox)) return false;
 
             foreach (String unDamagableLayer in UnDamagableLayers)
