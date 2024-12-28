@@ -7,13 +7,13 @@ namespace Components
 	public partial class ShotDamage : Damage
 	{
 		[Export]
-		private int Amount = 0;
+		protected int Amount = 0;
 
 		[Export]
-		private bool OnEnter = true;
+		protected bool OnEnter = true;
 
 		[Export]
-		private bool OnExit = false;
+		protected bool OnExit = false;
 
 		protected override void Attack(Hitbox hitbox)
 		{

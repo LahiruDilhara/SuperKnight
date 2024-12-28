@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxa50r4srtpv6"]
+
+[ext_resource type="Script" path="res://Components/Damage/ContinousDamage/ContinousDamage.cs" id="1_njewx"]
+
+[node name="ContinousDamage" type="Area2D"]
+script = ExtResource("1_njewx")

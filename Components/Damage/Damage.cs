@@ -21,6 +21,8 @@ namespace Components
         }
 
         abstract protected void Attack(Hitbox hitbox);
+
+        protected virtual void Attack(Hitbox hitbox, int amount) { }
         protected virtual void OnAreaEntered(Area2D area) { }
         protected virtual void OnAreaExited(Area2D area) { }
 
