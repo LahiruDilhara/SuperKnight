@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c67uy34mmsouw"]
+
+[ext_resource type="Script" path="res://Common/Components/HealBox/HealBox.cs" id="1_o3kwo"]
+
+[node name="HealBox" type="Area2D"]
+script = ExtResource("1_o3kwo")

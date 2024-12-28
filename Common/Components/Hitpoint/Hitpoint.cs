@@ -76,14 +76,19 @@ namespace Components
 			return damageAmount;
 		}
 
-		public void Heal(int hitpoints)
+		public int Heal(int hitpoints)
 		{
+			int amountToHeal = this.MaxHitpoints - this.CurrentHitpoints;
+			int healAmount = (amountToHeal < hitpoints) ? amountToHeal : hitpoints;
 			this.CurrentHitpoints += hitpoints;
+			return healAmount;
 		}
 
-		public void HealToMax()
+		public int HealToMax()
 		{
+			int amountToHeal = this.MaxHitpoints - this.CurrentHitpoints;
 			this.CurrentHitpoints += MaxHitpoints;
+			return amountToHeal;
 		}
 
 		public void SetMaxHitpoints(int hitpoints)
