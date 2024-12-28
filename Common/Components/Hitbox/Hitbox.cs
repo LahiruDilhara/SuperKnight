@@ -25,8 +25,6 @@ namespace Components
 		[Export]
 		public String Layer;
 
-		public override void _Ready() { }
-
 		public bool IsDead => Hitpoint.IsDied;
 
 		public int Damage(int amount)
@@ -45,14 +43,5 @@ namespace Components
 			return damage;
 		}
 
-
-		/*
-			var area = new Hitbox();
-
-			GD.Print(area.GetType().IsSubclassOf(typeof(Area2D)));		// true
-			GD.Print(area.GetType().IsSubclassOf(typeof(Node)));		// true
-			GD.Print(area.GetType().IsSubclassOf(typeof(Hitbox)));		// false
-			GD.Print(area.GetType() == typeof(Hitbox));					// true
-			*/
 	}
 }
