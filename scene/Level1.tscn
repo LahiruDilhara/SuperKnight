@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bxmm025rhtwmi" path="res://Player/player.tscn" id="5_eauda"]
 [ext_resource type="PackedScene" uid="uid://d2gxiq47dys5k" path="res://scene/game_status.tscn" id="6_7a3c1"]
 [ext_resource type="PackedScene" uid="uid://b8h1ntnsvbxl1" path="res://scene/slime_green.tscn" id="7_l8pim"]
-[ext_resource type="PackedScene" uid="uid://vknf6om07vty" path="res://Components/Damage/ShotDamage/shot_damage.tscn" id="9_wka1q"]
+[ext_resource type="PackedScene" uid="uid://c46e72wq3y6qk" path="res://Components/Damage/RepeatShotDamage/repeat_shot_damage.tscn" id="9_oxh13"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pk36o"]
 texture = ExtResource("1_7eihb")
@@ -350,7 +350,7 @@ _data = {
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h61ny"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxr7o"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4p13"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_2xsj0")
@@ -405,10 +405,12 @@ position = Vector2(1006, 127)
 [node name="SlimeGreen2" parent="Enemies" instance=ExtResource("7_l8pim")]
 position = Vector2(541, -17)
 
-[node name="ShotDamage" parent="." instance=ExtResource("9_wka1q")]
-Amount = 200
+[node name="RepeatShotDamage" parent="." instance=ExtResource("9_oxh13")]
+IntervalSeconds = 4.0
+RepeatCount = 5
+Amount = 100
 OnExit = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShotDamage"]
-position = Vector2(138, 16)
-shape = SubResource("RectangleShape2D_lxr7o")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RepeatShotDamage"]
+position = Vector2(137, 18)
+shape = SubResource("RectangleShape2D_f4p13")

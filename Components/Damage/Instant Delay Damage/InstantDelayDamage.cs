@@ -19,7 +19,7 @@ namespace Components
 			if (area is not Hitbox) return;
 			var hitbox = area as Hitbox;
 
-			if (HitBoxes.ContainsKey(hitbox)) return;
+			if (HitBoxes.ContainsKey(hitbox) || hitbox.IsDead) return;
 
 			Timer timer = new Timer
 			{
@@ -41,7 +41,10 @@ namespace Components
 
 		private void OnDelayOver(Timer timer, Hitbox hitbox)
 		{
-			Attack(hitbox);
+			if (!hitbox.IsDead)
+			{
+				Attack(hitbox);
+			}
 			HitBoxes.Remove(hitbox);
 			timer.QueueFree();
 		}
