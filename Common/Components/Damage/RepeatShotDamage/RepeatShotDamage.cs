@@ -1,6 +1,7 @@
 using Components;
 using Godot;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Components
 {
@@ -12,7 +13,23 @@ namespace Components
 		[Export]
 		private int RepeatCount = 1;
 
-		private Dictionary<Hitbox, HitBoxStatus> Hitboxes = new Dictionary<Hitbox, HitBoxStatus>();
+		private Timer GlobalTimer;
+
+		private Dictionary<Hitbox, int> Hitboxes = new Dictionary<Hitbox, int>();
+
+		public override void _Ready()
+		{
+			base._Ready();
+
+			GlobalTimer = new Timer
+			{
+				OneShot = false,
+				WaitTime = IntervalSeconds
+			};
+
+			AddChild(GlobalTimer);
+			GlobalTimer.Timeout += OnTimeOut;
+		}
 
 		protected override void OnAreaExited(Area2D area)
 		{
@@ -24,72 +41,44 @@ namespace Components
 
 			if (Hitboxes.ContainsKey(hitbox) || !IsDamagable(hitbox)) return;
 
-			var timer = new Timer
+			Hitboxes.Add(hitbox, RepeatCount);
+
+			if (GlobalTimer.IsStopped())
 			{
-				OneShot = true,
-				WaitTime = IntervalSeconds
-			};
-
-			AddChild(timer);
-
-			timer.Timeout += () => OnTimeOut(hitbox);
-
-			HitBoxStatus hitBoxStatus = new HitBoxStatus
-			{
-				counter = RepeatCount,
-				timer = timer
-			};
-
-			timer.Start();
-
-			Hitboxes.Add(hitbox, hitBoxStatus);
+				GlobalTimer.OneShot = false;
+				GlobalTimer.Start();
+			}
 		}
 
-		private void OnTimeOut(Hitbox hitbox)
+		private void OnTimeOut()
 		{
-			if (hitbox == null || !Hitboxes.ContainsKey(hitbox) || !IsInstanceValid(hitbox)) return;
-
-			var hitBoxStatus = Hitboxes[hitbox];
-
-			if (hitBoxStatus.counter <= 0 || hitbox.IsDead)
+			foreach (var pair in Hitboxes)
 			{
-				// Free the timer and remove the hitbox from the dictionary
-				if (IsInstanceValid(hitBoxStatus.timer))
+				Hitbox hitbox = pair.Key;
+
+				if (IsDamagable(hitbox) && pair.Value > 0)
 				{
-					hitBoxStatus.timer.QueueFree();
+					Attack(hitbox);
+					Hitboxes[hitbox] = pair.Value - 1;
 				}
-				Hitboxes.Remove(hitbox);
-				return;
+				else
+				{
+					Hitboxes.Remove(hitbox);
+				}
 			}
 
-			// Apply damage and decrement the counter
-			Attack(hitbox);
-			hitBoxStatus.counter--;
-
-			// Restart the timer for the next damage tick
-			hitBoxStatus.timer.Start();
+			if (!Hitboxes.Any())
+			{
+				GlobalTimer.Stop();
+			}
 		}
 
 		public override void _ExitTree()
 		{
 			base._ExitTree();
 
-			foreach (var hitBoxState in Hitboxes.Values)
-			{
-				if (hitBoxState.timer != null && IsInstanceValid(hitBoxState.timer))
-				{
-					hitBoxState.timer.QueueFree();
-				}
-			}
-
 			Hitboxes.Clear();
 		}
 
-	}
-
-	class HitBoxStatus
-	{
-		public Timer timer;
-		public int counter;
 	}
 }
