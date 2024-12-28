@@ -19,7 +19,7 @@ namespace Components
 		{
 			if (!IsDamagable(hitbox)) return;
 			int damageAmount = hitbox.Damage(Amount);
-			EmitSignal(nameof(OnAreaDamage), damageAmount);
+			SendAttackSignal(damageAmount);
 		}
 
 		protected override void OnAreaEntered(Area2D area)

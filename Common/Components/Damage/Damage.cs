@@ -48,6 +48,13 @@ namespace Components
 
             return false;
         }
+        protected void SendAttackSignal(int damageAmount)
+        {
+            if (damageAmount != 0)
+            {
+                EmitSignal(nameof(OnAreaDamage), damageAmount);
+            }
+        }
     }
 }
 
