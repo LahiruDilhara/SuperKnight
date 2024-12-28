@@ -11,8 +11,23 @@ public partial class ContinousDamage : ShotDamage
 	[Export]
 	private int Incremental = 0;
 
+	private Dictionary<Hitbox, int> Hitboxes = new Dictionary<Hitbox, int>();
 
-	private Dictionary<Hitbox, HitBoxStats> Hitboxes = new Dictionary<Hitbox, HitBoxStats>();
+	private Timer GlobalTimer;
+
+	public override void _Ready()
+	{
+		base._Ready();
+		GlobalTimer = new Timer
+		{
+			WaitTime = IntervalSeconds,
+			OneShot = false,
+			Autostart = true
+		};
+
+		AddChild(GlobalTimer);
+		GlobalTimer.Timeout += OnTimeOut;
+	}
 
 	protected override void Attack(Hitbox hitbox, int amount)
 	{
@@ -24,32 +39,13 @@ public partial class ContinousDamage : ShotDamage
 	protected override void OnAreaEntered(Area2D area)
 	{
 		base.OnAreaEntered(area);
-
 		if (area is not Hitbox) return;
 
 		var hitbox = area as Hitbox;
 
-		if (Hitboxes.ContainsKey(hitbox) || hitbox.IsDead) return;
+		if (!IsDamagable(hitbox) || Hitboxes.ContainsKey(hitbox)) return;
 
-		Timer timer = new Timer
-		{
-			OneShot = true,
-			WaitTime = IntervalSeconds
-		};
-
-		AddChild(timer);
-
-		timer.Timeout += () => OnTimeOut(hitbox);
-
-		HitBoxStats hitBoxStats = new HitBoxStats
-		{
-			timer = timer,
-			amount = Amount
-		};
-
-		Hitboxes.Add(hitbox, hitBoxStats);
-
-		timer.Start();
+		Hitboxes.Add(hitbox, Amount);
 	}
 
 	protected override void OnAreaExited(Area2D area)
@@ -57,59 +53,36 @@ public partial class ContinousDamage : ShotDamage
 		base.OnAreaExited(area);
 
 		var hitbox = area as Hitbox;
-		if (!Hitboxes.ContainsKey(hitbox)) return;
 
-		if (IsInstanceValid(Hitboxes[hitbox].timer))
-		{
-			Hitboxes[hitbox].timer.QueueFree();
-		}
+		if (!IsDamagable(hitbox)) return;
+
+		if (!Hitboxes.ContainsKey(hitbox)) return;
 
 		Hitboxes.Remove(hitbox);
 	}
-
-	protected void OnTimeOut(Hitbox hitbox)
+	private void OnTimeOut()
 	{
-		if (hitbox == null || !Hitboxes.ContainsKey(hitbox) || !IsInstanceValid(hitbox)) return;
-
-		// If dead clean the timer and remove the hitbox from the dictionary
-		if (hitbox.IsDead)
+		foreach (var pair in Hitboxes)
 		{
-			if (IsInstanceValid(Hitboxes[hitbox].timer))
+			Hitbox hitBox = pair.Key;
+			int amount = pair.Value;
+
+			if (IsDamagable(hitBox))
 			{
-				Hitboxes[hitbox].timer.QueueFree();
+				Attack(hitBox, amount);
+				Hitboxes[hitBox] = amount + Incremental;
 			}
-			Hitboxes.Remove(hitbox);
-			return;
+			else
+			{
+				Hitboxes.Remove(hitBox);
+			}
 		}
-
-		// Attack using the incremented amount
-		Attack(hitbox, Hitboxes[hitbox].amount);
-
-		// increment the next damage amount by the increment
-		Hitboxes[hitbox].amount += Incremental;
-
-		// Start timer again
-		Hitboxes[hitbox].timer.Start();
 	}
 
 	public override void _EnterTree()
 	{
 		base._EnterTree();
 
-		foreach (var hitBoxStats in Hitboxes.Values)
-		{
-			if (hitBoxStats != null && IsInstanceValid(hitBoxStats.timer))
-			{
-				hitBoxStats.timer.QueueFree();
-			}
-		}
-
 		Hitboxes.Clear();
 	}
-}
-
-class HitBoxStats
-{
-	public Timer timer;
-	public int amount;
 }

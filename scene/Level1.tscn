@@ -408,6 +408,7 @@ position = Vector2(541, -17)
 
 [node name="ContinousDamage" parent="." instance=ExtResource("9_qsg8e")]
 IntervalSeconds = 0.5
+Incremental = 100
 Amount = 100
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContinousDamage"]
