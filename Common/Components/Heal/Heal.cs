@@ -25,7 +25,7 @@ namespace Components
 
         abstract protected void Healing(HealBox healBox);
 
-        protected void Healing(HealBox healBox, int amount) { }
+        protected virtual void Healing(HealBox healBox, int amount) { }
 
         protected virtual void OnAreaEntered(Area2D area) { }
         protected virtual void OnAreaExited(Area2D area) { }
