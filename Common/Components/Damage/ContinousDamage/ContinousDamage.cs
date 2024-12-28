@@ -2,6 +2,7 @@ using Components;
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class ContinousDamage : ShotDamage
 {
@@ -22,7 +23,6 @@ public partial class ContinousDamage : ShotDamage
 		{
 			WaitTime = IntervalSeconds,
 			OneShot = false,
-			Autostart = true
 		};
 
 		AddChild(GlobalTimer);
@@ -45,6 +45,12 @@ public partial class ContinousDamage : ShotDamage
 
 		if (!IsDamagable(hitbox) || Hitboxes.ContainsKey(hitbox)) return;
 
+		if (GlobalTimer.IsStopped())
+		{
+			GlobalTimer.OneShot = false;
+			GlobalTimer.Start();
+		}
+
 		Hitboxes.Add(hitbox, Amount);
 	}
 
@@ -59,6 +65,11 @@ public partial class ContinousDamage : ShotDamage
 		if (!Hitboxes.ContainsKey(hitbox)) return;
 
 		Hitboxes.Remove(hitbox);
+
+		if (!Hitboxes.Any())
+		{
+			GlobalTimer.Stop();
+		}
 	}
 	private void OnTimeOut()
 	{
