@@ -48,6 +48,20 @@ namespace Components
 			HitBoxes.Remove(hitbox);
 			timer.QueueFree();
 		}
+
+		public override void _ExitTree()
+		{
+			base._ExitTree();
+			foreach (var timer in HitBoxes.Values)
+			{
+				if (timer != null && IsInstanceValid(timer))
+				{
+					timer.QueueFree();
+				}
+			}
+
+			HitBoxes.Clear();
+		}
 	}
 
 }
