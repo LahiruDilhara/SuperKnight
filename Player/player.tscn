@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bxmm025rhtwmi"]
+[gd_scene load_steps=36 format=3 uid="uid://bxmm025rhtwmi"]
 
 [ext_resource type="Texture2D" uid="uid://88bllxa6gxim" path="res://assets/sprites/knight.png" id="1_1livn"]
 [ext_resource type="Script" path="res://Player/scripts/Player.cs" id="1_4t06a"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Player/scripts/States/Idle.cs" id="6_0gvey"]
 [ext_resource type="Script" path="res://Player/scripts/States/Fall.cs" id="7_36222"]
 [ext_resource type="Script" path="res://Player/scripts/States/Jump.cs" id="8_rsexn"]
+[ext_resource type="PackedScene" uid="uid://c67uy34mmsouw" path="res://Common/Components/HealBox/heal_box.tscn" id="11_su10i"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fldyf"]
 atlas = ExtResource("1_1livn")
@@ -188,6 +189,9 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbmee"]
+size = Vector2(13, 19)
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 13
 script = ExtResource("1_4t06a")
@@ -245,3 +249,10 @@ Fall = NodePath("../fall")
 Gravity = 500
 InAirProjectionSpeed = 80
 Idle = NodePath("../idle")
+
+[node name="HealBox" parent="." node_paths=PackedStringArray("Hitpoint") instance=ExtResource("11_su10i")]
+Hitpoint = NodePath("../Hitpoint")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealBox"]
+position = Vector2(-0.5, -9.5)
+shape = SubResource("RectangleShape2D_mbmee")

@@ -15,6 +15,8 @@ public partial class HealBox : Area2D
 
 	public bool IsDamaged => Hitpoint.IsDamaged;
 
+	public bool IsDied => Hitpoint.IsDied;
+
 	public int Heal(int amount)
 	{
 		if (!IsDamaged) return 0;

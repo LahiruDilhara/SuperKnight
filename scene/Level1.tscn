@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://b2812l1sr3jn0"]
+[gd_scene load_steps=22 format=4 uid="uid://b2812l1sr3jn0"]
 
 [ext_resource type="Script" path="res://scripts/Level1.cs" id="1_2xsj0"]
 [ext_resource type="Texture2D" uid="uid://1se48xpncrh4" path="res://assets/sprites/world_tileset.png" id="1_7eihb"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d2gxiq47dys5k" path="res://scene/game_status.tscn" id="6_7a3c1"]
 [ext_resource type="PackedScene" uid="uid://b8h1ntnsvbxl1" path="res://scene/slime_green.tscn" id="7_l8pim"]
 [ext_resource type="PackedScene" uid="uid://bxa50r4srtpv6" path="res://Common/Components/Damage/ContinousDamage/continous_damage.tscn" id="9_fg3pt"]
+[ext_resource type="PackedScene" uid="uid://bjndm0wpy3j8a" path="res://Common/Components/Heal/InstantHeal/instant_heal.tscn" id="10_358tg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pk36o"]
 texture = ExtResource("1_7eihb")
@@ -353,6 +354,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adg3c"]
 size = Vector2(110, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvogo"]
+size = Vector2(53, 20)
+
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_2xsj0")
 
@@ -413,3 +417,9 @@ Amount = 100
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContinousDamage"]
 position = Vector2(202, 18)
 shape = SubResource("RectangleShape2D_adg3c")
+
+[node name="InstantHeal" parent="." instance=ExtResource("10_358tg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InstantHeal"]
+position = Vector2(40, 17)
+shape = SubResource("RectangleShape2D_cvogo")
