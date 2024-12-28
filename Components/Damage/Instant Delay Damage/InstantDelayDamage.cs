@@ -19,7 +19,7 @@ namespace Components
 			if (area is not Hitbox) return;
 			var hitbox = area as Hitbox;
 
-			if (HitBoxes.ContainsKey(hitbox) || hitbox.IsDead) return;
+			if (HitBoxes.ContainsKey(hitbox) || !IsDamagable(hitbox)) return;
 
 			Timer timer = new Timer
 			{

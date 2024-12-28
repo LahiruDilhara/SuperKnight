@@ -22,7 +22,7 @@ namespace Components
 
 			var hitbox = area as Hitbox;
 
-			if (Hitboxes.ContainsKey(hitbox) || hitbox.IsDead) return;
+			if (Hitboxes.ContainsKey(hitbox) || !IsDamagable(hitbox)) return;
 
 			var timer = new Timer
 			{
