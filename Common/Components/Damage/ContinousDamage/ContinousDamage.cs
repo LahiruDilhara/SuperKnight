@@ -93,7 +93,7 @@ public partial class ContinousDamage : ShotDamage
 	public override void _EnterTree()
 	{
 		base._EnterTree();
-
 		Hitboxes.Clear();
+		GlobalTimer.QueueFree();
 	}
 }

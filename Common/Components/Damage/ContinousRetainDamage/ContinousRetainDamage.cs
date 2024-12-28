@@ -98,6 +98,7 @@ namespace Components
 		{
 			base._EnterTree();
 			RetainHitBoxes.Clear();
+			GlobalTimer.QueueFree();
 		}
 	}
 

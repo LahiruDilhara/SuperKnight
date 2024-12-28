@@ -76,8 +76,8 @@ namespace Components
 		public override void _ExitTree()
 		{
 			base._ExitTree();
-
 			Hitboxes.Clear();
+			GlobalTimer.QueueFree();
 		}
 
 	}
