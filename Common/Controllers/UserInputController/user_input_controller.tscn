@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://lgx22i7im7b4"]
+
+[ext_resource type="Script" path="res://Common/Controllers/UserInputController/UserInputController.cs" id="1_ucqee"]
+
+[node name="UserInputController" type="Node"]
+script = ExtResource("1_ucqee")

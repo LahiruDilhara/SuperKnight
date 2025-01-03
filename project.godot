@@ -17,8 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://Global/Global.cs"
-MessageBus="*res://Global/MessageBus.cs"
+InputManager="*res://Globals/InputManager.cs"
 
 [dotnet]
 
