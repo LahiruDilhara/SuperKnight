@@ -8,6 +8,11 @@ namespace Controllers
 {
 	public partial class UserInputController : IController
 	{
+		[Export]
+		private int JumpVelocity = -180;
+
+		[Export]
+		private int RunSpeed = 60;
 
 		public override JumpSpec WantToJump()
 		{
@@ -15,7 +20,7 @@ namespace Controllers
 			{
 				return new JumpSpec()
 				{
-					JumpVelocity = -180
+					JumpVelocity = JumpVelocity
 				};
 			}
 			return null;
@@ -28,7 +33,7 @@ namespace Controllers
 				return new MoveSpec
 				{
 					Direction = new Vector2(-1, 0),
-					Speed = 60
+					Speed = RunSpeed
 				};
 			}
 			else if (InputManager.Instance.IsActionPressed("right"))
@@ -36,7 +41,7 @@ namespace Controllers
 				return new MoveSpec
 				{
 					Direction = new Vector2(1, 0),
-					Speed = 60
+					Speed = RunSpeed
 				};
 			};
 			return null;

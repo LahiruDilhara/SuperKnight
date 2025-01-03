@@ -254,3 +254,4 @@ position = Vector2(-0.5, -9.5)
 shape = SubResource("RectangleShape2D_mbmee")
 
 [node name="UserInputController" parent="." instance=ExtResource("12_y6xgq")]
+RunSpeed = 100

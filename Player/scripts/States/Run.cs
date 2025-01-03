@@ -12,13 +12,25 @@ namespace Player
 
 		[Export]
 		private State Idel;
+
+		private MoveSpec moveSpec;
 		public override void Enter()
 		{
 			Animation?.Play(AnimationName);
 		}
+
+		public override void PhysicsUpdate(float delta)
+		{
+			if (this.moveSpec == null) return;
+			var VelocityVector = Character.Velocity;
+
+			VelocityVector.X = moveSpec.Direction.X * moveSpec.Speed;
+			Character.Velocity = VelocityVector;
+			Character.MoveAndSlide();
+		}
 		public override void ProcessUpdate(float delta)
 		{
-			MoveSpec moveSpec = controller.WantToMove();
+			this.moveSpec = controller.WantToMove();
 
 			if (inputHandler.WantToJump())
 			{
@@ -35,7 +47,6 @@ namespace Player
 				ChangeState(Idel);
 				return;
 			}
-			var VelocityVector = Character.Velocity;
 
 			if (moveSpec.Direction.X == -1)
 			{
@@ -45,10 +56,6 @@ namespace Player
 			{
 				Animation.FlipH = false;
 			}
-
-			VelocityVector.X = moveSpec.Direction.X * moveSpec.Speed;
-			Character.Velocity = VelocityVector;
-			Character.MoveAndSlide();
 		}
 	}
 }
