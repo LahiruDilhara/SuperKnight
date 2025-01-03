@@ -1,6 +1,51 @@
 using Godot;
 using System;
 
-public partial class MessageBus : Node
+namespace Globals
 {
+    public partial class MessageBus : Node
+    {
+        // Stores the game manager singleton instance
+        public static MessageBus Instance { get; private set; }
+
+        // Signals for global events
+        [Signal]
+        public delegate void StateChangedEventHandler(string stateName);
+
+        [Signal]
+        public delegate void HitpointChangedEventHandler(int currentHitpoints, int MaxHitpoints);
+
+        [Signal]
+        public delegate void ScoreChangedEventHandler(int score);
+
+        public override void _Ready()
+        {
+            base._Ready();
+            // check if an instance already exists
+            if (Instance != null && Instance != this)
+            {
+                // remove current instance if there is already one exists
+                QueueFree();
+                return;
+            }
+            Instance = this;
+            GD.Print("MessageBus Initialized");
+        }
+
+        public void EmitStateChanged(string stateName)
+        {
+            EmitSignal(nameof(this.StateChanged), stateName);
+        }
+
+        public void EmitHitpointChanged(int currentHitpoints, int MaxHitpoints)
+        {
+            EmitSignal(nameof(this.HitpointChanged), currentHitpoints, MaxHitpoints);
+        }
+
+        public void EmitScoreChanged(int score)
+        {
+            EmitSignal(nameof(this.ScoreChanged), score);
+        }
+    }
+
 }
