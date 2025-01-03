@@ -57,6 +57,7 @@ public partial class ContinousDamage : ShotDamage
 	protected override void OnAreaExited(Area2D area)
 	{
 		base.OnAreaExited(area);
+		if (area is not Hitbox) return;
 
 		var hitbox = area as Hitbox;
 
