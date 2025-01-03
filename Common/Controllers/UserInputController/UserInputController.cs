@@ -27,14 +27,16 @@ namespace Controllers
 			{
 				return new MoveSpec
 				{
-					Direction = new Vector2(-1, 0)
+					Direction = new Vector2(-1, 0),
+					Speed = 60
 				};
 			}
 			else if (InputManager.Instance.IsActionPressed("right"))
 			{
 				return new MoveSpec
 				{
-					Direction = new Vector2(1, 0)
+					Direction = new Vector2(1, 0),
+					Speed = 60
 				};
 			};
 			return null;

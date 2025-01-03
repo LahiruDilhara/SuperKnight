@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Types;
 
 namespace Player
 {
@@ -10,9 +11,6 @@ namespace Player
 		public String AnimationName = "run";
 
 		[Export]
-		public int RunSpeed = 80;
-
-		[Export]
 		private State Idel;
 		public override void Enter()
 		{
@@ -20,6 +18,8 @@ namespace Player
 		}
 		public override void ProcessUpdate(float delta)
 		{
+			MoveSpec moveSpec = controller.WantToMove();
+
 			if (inputHandler.WantToJump())
 			{
 				ChangeState(Jump);
@@ -30,25 +30,23 @@ namespace Player
 				ChangeState(Fall);
 				return;
 			}
-			else if (inputHandler.GetMovementDirection() == 0f)
+			else if (moveSpec == null)
 			{
 				ChangeState(Idel);
 				return;
 			}
 			var VelocityVector = Character.Velocity;
 
-			var direction = inputHandler.GetMovementDirection();
-
-			if (direction == -1)
+			if (moveSpec.Direction.X == -1)
 			{
 				Animation.FlipH = true;
 			}
-			else if (direction == 1)
+			else if (moveSpec.Direction.X == 1)
 			{
 				Animation.FlipH = false;
 			}
 
-			VelocityVector.X = direction * this.RunSpeed;
+			VelocityVector.X = moveSpec.Direction.X * moveSpec.Speed;
 			Character.Velocity = VelocityVector;
 			Character.MoveAndSlide();
 		}

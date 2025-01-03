@@ -227,7 +227,6 @@ controller = NodePath("../UserInputController")
 
 [node name="run" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idel", "Fall", "Jump")]
 script = ExtResource("5_cx7sp")
-RunSpeed = 60
 Idel = NodePath("../idle")
 Fall = NodePath("../fall")
 Jump = NodePath("../jump")
