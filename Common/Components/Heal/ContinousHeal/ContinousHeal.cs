@@ -5,9 +5,11 @@ using System.Linq;
 
 public partial class ContinousHeal : ShotHeal
 {
+	// The interval seconds that healing was applied in
 	[Export]
 	private float IntervalSeconds = 1f;
 
+	// how much hitpoints need to be increased for the amount. this will added to the fixed amount of hitpoints to gives exponential hitpoint increase in each iteration
 	[Export]
 	private int Incremental = 0;
 
