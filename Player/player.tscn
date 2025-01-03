@@ -1,10 +1,9 @@
-[gd_scene load_steps=37 format=3 uid="uid://bxmm025rhtwmi"]
+[gd_scene load_steps=36 format=3 uid="uid://bxmm025rhtwmi"]
 
 [ext_resource type="Texture2D" uid="uid://88bllxa6gxim" path="res://assets/sprites/knight.png" id="1_1livn"]
 [ext_resource type="Script" path="res://Player/scripts/Player.cs" id="1_4t06a"]
 [ext_resource type="PackedScene" uid="uid://wjmj0e2lkoq0" path="res://Common/Components/Hitbox/hitbox.tscn" id="3_3d4up"]
 [ext_resource type="PackedScene" uid="uid://cf8etax2scmb0" path="res://Common/Components/Hitpoint/hitpoint.tscn" id="3_bso02"]
-[ext_resource type="Script" path="res://Player/scripts/States/InputHandler.cs" id="3_sevn4"]
 [ext_resource type="Script" path="res://Player/scripts/States/StateMachine.cs" id="3_tebu6"]
 [ext_resource type="Script" path="res://Player/scripts/States/Run.cs" id="5_cx7sp"]
 [ext_resource type="Script" path="res://Player/scripts/States/Idle.cs" id="6_0gvey"]
@@ -216,13 +215,10 @@ polygon = PackedVector2Array(-6, 0, -6, -8, -5, -8, -5, -15, -7, -15, -7, -18, -
 [node name="Hitpoint" parent="." instance=ExtResource("3_bso02")]
 MaxHitpoints = 2500
 
-[node name="InputHandler" type="Node" parent="."]
-script = ExtResource("3_sevn4")
-
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "inputHandler", "controller")]
 script = ExtResource("3_tebu6")
 initialState = NodePath("idle")
-inputHandler = NodePath("../InputHandler")
+inputHandler = NodePath("")
 controller = NodePath("../UserInputController")
 
 [node name="run" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idel", "Fall", "Jump")]

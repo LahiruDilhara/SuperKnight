@@ -32,7 +32,7 @@ namespace Player
 		{
 			this.moveSpec = controller.WantToMove();
 
-			if (inputHandler.WantToJump())
+			if (controller.WantToJump() != null)
 			{
 				ChangeState(Jump);
 				return;

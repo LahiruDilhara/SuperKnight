@@ -13,8 +13,6 @@ namespace Player
 
 		public AnimatedSprite2D Animation;
 
-		public InputHandler inputHandler;
-
 		public IController controller;
 
 		public virtual void Enter()

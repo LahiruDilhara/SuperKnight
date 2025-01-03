@@ -14,8 +14,6 @@ namespace Player
 		[Export]
 		private State initialState;
 
-		[Export]
-		private InputHandler inputHandler;
 
 		[Export]
 		private IController controller;
@@ -36,7 +34,6 @@ namespace Player
 
 			this.CurrentState.Character = this.Character;
 			this.CurrentState.Animation = this.Animation;
-			this.CurrentState.inputHandler = this.inputHandler;
 			this.CurrentState.controller = this.controller;
 
 			this.CurrentState.Enter();
