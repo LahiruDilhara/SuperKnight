@@ -13,7 +13,10 @@ namespace Controllers
 		{
 			if (InputManager.Instance.IsActionPressed("jump"))
 			{
-				return new JumpSpec();
+				return new JumpSpec()
+				{
+					JumpVelocity = -180
+				};
 			}
 			return null;
 		}

@@ -2,6 +2,6 @@ namespace Types
 {
     public class JumpSpec
     {
-        public int MyProperty { get; set; }
+        public int JumpVelocity { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Types;
 
 namespace Player
 {
@@ -36,11 +37,18 @@ namespace Player
 
 		public override void Enter()
 		{
+			JumpSpec jumpSpec = controller.WantToJump();
+
+			if (jumpSpec == null)
+			{
+				ChangeState(Idle);
+				return;
+			}
 			// set jump animation
 			Animation?.Play(AnimationName);
 
 			// set jump velocity
-			Character.Velocity += new Vector2(x: 0, y: this.JumpVelocity);
+			Character.Velocity += new Vector2(x: 0, y: jumpSpec.JumpVelocity);
 			Character.MoveAndSlide();
 		}
 		public override void ProcessUpdate(float delta)
