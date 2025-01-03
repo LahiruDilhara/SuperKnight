@@ -10,6 +10,7 @@ public partial class Fall : InAir
 
 	public override void Enter()
 	{
+		base.Enter();
 		// set idel animation
 		Animation?.Play(AnimationName);
 	}

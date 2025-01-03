@@ -15,6 +15,7 @@ namespace Player
 
 		public override void Enter()
 		{
+			base.Enter();
 			JumpSpec jumpSpec = controller.WantToJump();
 
 			if (jumpSpec == null)
