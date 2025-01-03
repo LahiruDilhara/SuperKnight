@@ -10,28 +10,6 @@ namespace Player
 		[Export]
 		public String AnimationName = "jump";
 
-		private int _JumpVelocity = -400;
-
-		[Export]
-		public int JumpVelocity
-		{
-			get
-			{
-				return _JumpVelocity;
-			}
-			set
-			{
-				if (value > 0)
-				{
-					this._JumpVelocity = -1 * value;
-				}
-				else
-				{
-					this._JumpVelocity = value;
-				}
-			}
-		}
-
 		[Export]
 		private State Fall;
 
