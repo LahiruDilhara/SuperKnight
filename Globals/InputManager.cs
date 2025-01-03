@@ -19,6 +19,11 @@ namespace Globals
         public override void _Ready()
         {
             base._Ready();
+            if (Instance != null && Instance != this)
+            {
+                QueueFree();
+                return;
+            }
             Instance = this;
             InitilizeDefaultActions();
         }
