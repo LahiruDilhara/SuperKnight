@@ -14,8 +14,11 @@ namespace Globals
         // Player score
         public int PlayerScore = 0;
 
-        // Player Hitpoints
-        public int PlayerHitpoints = 2500;
+        // Player current Hitpoints
+        public int PlayerCurrentHitpoints = 2500;
+
+        // Player Max Hitpoints
+        public int PlayerMaxHitpoints { get; private set; } = 2500;
 
         public override void _Ready()
         {
@@ -56,20 +59,24 @@ namespace Globals
         public void SetScore(int amount)
         {
             this.PlayerScore = amount;
+            MessageBus.Instance.EmitScoreChanged(this.PlayerScore);
         }
 
-        public void SetHitpoints(int Hitpoints)
+        public void SetHitpoints(int currentHitpoints)
         {
-            this.PlayerHitpoints = Hitpoints;
+            this.PlayerCurrentHitpoints = currentHitpoints;
+            MessageBus.Instance.EmitHitpointChanged(currentHitpoints, this.PlayerMaxHitpoints);
         }
 
         public void IncreaseScore(int points)
         {
             PlayerScore += points;
+            MessageBus.Instance.EmitScoreChanged(PlayerScore);
         }
         public void ResetGame()
         {
-            this.PlayerHitpoints = 2500;
+            this.PlayerCurrentHitpoints = 2500;
+            this.PlayerMaxHitpoints = 2500;
             this.PlayerScore = 0;
             ChangeState(GameState.Playing);
         }
