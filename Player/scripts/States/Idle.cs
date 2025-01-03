@@ -20,12 +20,12 @@ namespace Player
 		}
 		public override void ProcessUpdate(float delta)
 		{
-			if (inputHandler.WantToJump())
+			if (controller.WantToJump() != null)
 			{
 				ChangeState(Jump);
 				return;
 			}
-			else if (inputHandler.GetMovementDirection() != 0f)
+			else if (controller.WantToMove() != null)
 			{
 				ChangeState(Run);
 				return;
