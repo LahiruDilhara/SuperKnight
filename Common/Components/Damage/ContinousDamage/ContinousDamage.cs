@@ -60,11 +60,10 @@ public partial class ContinousDamage : ShotDamage
 
 		var hitbox = area as Hitbox;
 
-		if (!IsDamagable(hitbox)) return;
-
-		if (!Hitboxes.ContainsKey(hitbox)) return;
-
-		Hitboxes.Remove(hitbox);
+		if (Hitboxes.ContainsKey(hitbox))
+		{
+			Hitboxes.Remove(hitbox);
+		}
 
 		if (!Hitboxes.Any())
 		{
