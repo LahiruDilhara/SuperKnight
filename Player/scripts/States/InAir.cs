@@ -5,13 +5,6 @@ namespace Player
 {
     public partial class InAir : State
     {
-
-        [Export]
-        public int Gravity = 980;
-
-        [Export]
-        public int InAirProjectionSpeed = 150;
-
         [Export]
         protected State Idle;
 
