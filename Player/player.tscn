@@ -240,16 +240,12 @@ Jump = NodePath("../jump")
 
 [node name="fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idle")]
 script = ExtResource("7_36222")
-Gravity = 500
-InAirProjectionSpeed = 80
 Idle = NodePath("../idle")
 
 [node name="jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("Fall", "Idle")]
 script = ExtResource("8_rsexn")
 JumpVelocity = 180
 Fall = NodePath("../fall")
-Gravity = 500
-InAirProjectionSpeed = 80
 Idle = NodePath("../idle")
 
 [node name="HealBox" parent="." node_paths=PackedStringArray("Hitpoint") instance=ExtResource("11_su10i")]

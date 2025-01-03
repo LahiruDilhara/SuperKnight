@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Types;
 
 namespace Player
 {
@@ -18,20 +19,22 @@ namespace Player
         public override void ProcessUpdate(float delta)
         {
             var VelocityVector = Character.Velocity;
+            MoveSpec moveSpec = this.controller.WantToMove();
 
-            var direction = inputHandler.GetMovementDirection();
-
-            if (direction == -1)
+            if (moveSpec != null)
             {
-                this.Animation.FlipH = true;
-            }
-            else if (direction == 1)
-            {
-                this.Animation.FlipH = false;
-            }
+                if (moveSpec.Direction.X == -1)
+                {
+                    this.Animation.FlipH = true;
+                }
+                else if (moveSpec.Direction.X == 1)
+                {
+                    this.Animation.FlipH = false;
+                }
 
-            VelocityVector.X = direction * this.controller.InAirProjectionSpeed;
+                VelocityVector.X = moveSpec.Direction.X * this.controller.InAirProjectionSpeed;
 
+            }
             Character.Velocity = VelocityVector;
             Character.MoveAndSlide();
         }
