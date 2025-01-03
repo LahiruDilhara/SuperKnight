@@ -21,6 +21,7 @@ namespace Globals
             base._Ready();
             if (Instance != null && Instance != this)
             {
+                // Remove the current instance if there is already instance exists
                 QueueFree();
                 return;
             }
