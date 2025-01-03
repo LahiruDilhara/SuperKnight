@@ -73,13 +73,14 @@ public partial class ContinousHeal : ShotHeal
 	protected override void OnAreaExited(Area2D area)
 	{
 		base.OnAreaExited(area);
+
 		if (area is not HealBox) return;
 		var healBox = area as HealBox;
 
-		if (!IsHealable(healBox)) return;
-		if (!HealBoxes.ContainsKey(healBox)) return;
-
-		HealBoxes.Remove(healBox);
+		if (HealBoxes.ContainsKey(healBox))
+		{
+			HealBoxes.Remove(healBox);
+		}
 
 		if (!HealBoxes.Any())
 		{
