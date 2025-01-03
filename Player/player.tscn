@@ -215,10 +215,9 @@ polygon = PackedVector2Array(-6, 0, -6, -8, -5, -8, -5, -15, -7, -15, -7, -18, -
 [node name="Hitpoint" parent="." instance=ExtResource("3_bso02")]
 MaxHitpoints = 2500
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "inputHandler", "controller")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState", "controller")]
 script = ExtResource("3_tebu6")
 initialState = NodePath("idle")
-inputHandler = NodePath("")
 controller = NodePath("../UserInputController")
 
 [node name="run" type="Node" parent="StateMachine" node_paths=PackedStringArray("Idel", "Fall", "Jump")]
