@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bxmm025rhtwmi"]
+[gd_scene load_steps=37 format=3 uid="uid://bxmm025rhtwmi"]
 
 [ext_resource type="Texture2D" uid="uid://88bllxa6gxim" path="res://assets/sprites/knight.png" id="1_1livn"]
 [ext_resource type="Script" path="res://Player/scripts/Player.cs" id="1_4t06a"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Player/scripts/States/Fall.cs" id="7_36222"]
 [ext_resource type="Script" path="res://Player/scripts/States/Jump.cs" id="8_rsexn"]
 [ext_resource type="PackedScene" uid="uid://c67uy34mmsouw" path="res://Common/Components/HealBox/heal_box.tscn" id="11_su10i"]
+[ext_resource type="PackedScene" uid="uid://lgx22i7im7b4" path="res://Common/Controllers/UserInputController/user_input_controller.tscn" id="12_y6xgq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fldyf"]
 atlas = ExtResource("1_1livn")
@@ -256,3 +257,5 @@ Hitpoint = NodePath("../Hitpoint")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HealBox"]
 position = Vector2(-0.5, -9.5)
 shape = SubResource("RectangleShape2D_mbmee")
+
+[node name="UserInputController" parent="." instance=ExtResource("12_y6xgq")]

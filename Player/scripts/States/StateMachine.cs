@@ -1,3 +1,4 @@
+using Controllers;
 using Godot;
 using System;
 
@@ -16,6 +17,9 @@ namespace Player
 		[Export]
 		private InputHandler inputHandler;
 
+		[Export]
+		private IController controller;
+
 		public void Init(CharacterBody2D character, AnimatedSprite2D Animation = null)
 		{
 			this.Character = character;
@@ -33,6 +37,7 @@ namespace Player
 			this.CurrentState.Character = this.Character;
 			this.CurrentState.Animation = this.Animation;
 			this.CurrentState.inputHandler = this.inputHandler;
+			this.CurrentState.controller = this.controller;
 
 			this.CurrentState.Enter();
 			if (!this.CurrentState.IsConnected(nameof(this.CurrentState.StateChange), new Callable(this, nameof(this.ChangeState))))
