@@ -10,14 +10,14 @@ namespace Player
         public int Gravity = 980;
 
         [Export]
-		public int InAirProjectionSpeed = 150;
+        public int InAirProjectionSpeed = 150;
 
         [Export]
         protected State Idle;
 
         public override void PhysicsUpdate(float delta)
         {
-            var projectionY = this.Gravity * delta;
+            var projectionY = this.controller.Gravity * delta;
             Character.Velocity += new Vector2(y: projectionY, x: 0);
             Character.MoveAndSlide();
         }
@@ -37,7 +37,7 @@ namespace Player
                 this.Animation.FlipH = false;
             }
 
-            VelocityVector.X = direction * this.InAirProjectionSpeed;
+            VelocityVector.X = direction * this.controller.InAirProjectionSpeed;
 
             Character.Velocity = VelocityVector;
             Character.MoveAndSlide();

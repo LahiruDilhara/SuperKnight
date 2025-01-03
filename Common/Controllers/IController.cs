@@ -5,9 +5,12 @@ namespace Controllers
 {
     public abstract partial class IController : Node
     {
-        public int Gravity = 980;
+        [Export]
+        public int Gravity = 500;
 
-        public int InAirProjectionSpeed = 150;
+        [Export]
+        public int InAirProjectionSpeed = 80;
+
         public abstract MoveSpec WantToMove();
         public abstract JumpSpec WantToJump();
     }
