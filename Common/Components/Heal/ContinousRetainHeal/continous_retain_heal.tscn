@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4grlat0ai5xu"]
+
+[ext_resource type="Script" path="res://Common/Components/Heal/ContinousRetainHeal/ContinousRetainHeal.cs" id="1_encc3"]
+
+[node name="ContinousRetainHeal" type="Area2D"]
+script = ExtResource("1_encc3")

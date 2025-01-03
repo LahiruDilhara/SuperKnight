@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d2gxiq47dys5k" path="res://scene/game_status.tscn" id="6_7a3c1"]
 [ext_resource type="PackedScene" uid="uid://b8h1ntnsvbxl1" path="res://scene/slime_green.tscn" id="7_l8pim"]
 [ext_resource type="PackedScene" uid="uid://bxa50r4srtpv6" path="res://Common/Components/Damage/ContinousDamage/continous_damage.tscn" id="9_fg3pt"]
-[ext_resource type="PackedScene" uid="uid://da8jw1d1ps747" path="res://Common/Components/Heal/ContinousHeal/continous_heal.tscn" id="10_exd4f"]
+[ext_resource type="PackedScene" uid="uid://c4grlat0ai5xu" path="res://Common/Components/Heal/ContinousRetainHeal/continous_retain_heal.tscn" id="10_ksu4d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pk36o"]
 texture = ExtResource("1_7eihb")
@@ -354,8 +354,8 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adg3c"]
 size = Vector2(110, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mgpkb"]
-size = Vector2(56, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hcne"]
+size = Vector2(49, 20)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_2xsj0")
@@ -418,9 +418,12 @@ Amount = 100
 position = Vector2(202, 18)
 shape = SubResource("RectangleShape2D_adg3c")
 
-[node name="ContinousHeal" parent="." instance=ExtResource("10_exd4f")]
+[node name="ContinousRetainHeal" parent="." instance=ExtResource("10_ksu4d")]
+UseIncrementedHeal = true
+RepeatCount = 5
+Incremental = 100
 Amount = 100
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinousHeal"]
-position = Vector2(38, 19)
-shape = SubResource("RectangleShape2D_mgpkb")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContinousRetainHeal"]
+position = Vector2(34.5, 20)
+shape = SubResource("RectangleShape2D_1hcne")

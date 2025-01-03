@@ -93,14 +93,13 @@ namespace Components
 				GlobalTimer.Stop();
 			}
 		}
-
-		public override void _EnterTree()
-		{
-			base._EnterTree();
+        public override void _ExitTree()
+        {
+            base._ExitTree();
 			RetainHitBoxes.Clear();
 			GlobalTimer.QueueFree();
-		}
-	}
+        }
+    }
 
 	public class HitBoxStats
 	{

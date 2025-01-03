@@ -52,7 +52,7 @@ public partial class ContinousHeal : ShotHeal
 		HealBoxes.Add(healBox, Amount);
 	}
 
-	protected void OnTimeOut()
+	private void OnTimeOut()
 	{
 		foreach (var pair in HealBoxes)
 		{
@@ -62,6 +62,7 @@ public partial class ContinousHeal : ShotHeal
 			if (IsHealable(healBox))
 			{
 				Healing(healBox, amount);
+				HealBoxes[healBox] = amount + Incremental;
 			}
 			else
 			{
