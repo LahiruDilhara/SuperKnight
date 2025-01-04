@@ -3,24 +3,34 @@ using Godot;
 
 public partial class Coin : Node2D
 {
+	[Export]
+	public int Value = 0;
+
+	[Export]
+	public int Multiplier = 1;
+
+	public Pickable pickable;
 	public override void _Ready()
 	{
-		var node = GetNode<Pickable>("ValuePickable");
-		node.NodeType = typeof(Player.Player);
-		node.Pick += CoinCollectCallable;
+		// Get references to the nodes
+		pickable = GetNode<Pickable>("Pickable");
+
+		// Initialize nodes
+		pickable.Initialize(this.Clone());
 	}
 
-	private void init()
+	public int GetValue()
 	{
-		// Connect("body_entered", new Callable(this, nameof(this.CoinCollectCallable)));
+		return Value * Multiplier;
 	}
 
-	public override void _Process(double delta)
+	// Generate the clone
+	private Coin Clone()
 	{
-	}
-
-	private void CoinCollectCallable()
-	{
-		GD.Print("Call the callable in coin");
+		return new Coin
+		{
+			Value = this.Value,
+			Multiplier = this.Multiplier
+		};
 	}
 }

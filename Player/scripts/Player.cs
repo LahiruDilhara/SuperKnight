@@ -20,6 +20,7 @@ namespace Player
 		private Hitpoint hitpoint;
 		private HealBox healBox;
 		private Hitbox hitbox;
+		private PicableCollector picableCollector;
 
 		public override void _Ready()
 		{
@@ -29,6 +30,7 @@ namespace Player
 			this.hitpoint = GetNode<Hitpoint>("Hitpoint");
 			this.healBox = GetNode<HealBox>("HealBox");
 			this.hitbox = GetNode<Hitbox>("Hitbox");
+			this.picableCollector = GetNode<PicableCollector>("PicableCollector");
 
 
 			// Initialize the Hitpoint component
@@ -44,6 +46,11 @@ namespace Player
 			if (!hitpoint.IsConnected(nameof(hitpoint.Died), new Callable(this, nameof(this.OnDead))))
 			{
 				hitpoint.Connect(nameof(hitpoint.Died), new Callable(this, nameof(this.OnDead)));
+			}
+			// Connect with pickable collector component picked signal
+			if (!picableCollector.IsConnected(nameof(picableCollector.Picked), new Callable(this, nameof(this.OnPick))))
+			{
+				picableCollector.Connect(nameof(picableCollector.Picked), new Callable(this, nameof(this.OnPick)));
 			}
 
 			stateMachine.Initialize(character: this, Animation: Animation);
@@ -76,6 +83,14 @@ namespace Player
 		private void OnDead()
 		{
 
+		}
+		private void OnPick(Node pickedNode)
+		{
+			if (pickedNode is Coin coin)
+			{
+				// If it is a coin, then increase the score
+				GameManager.Instance.IncreaseScore(coin.GetValue());
+			}
 		}
 	}
 }
