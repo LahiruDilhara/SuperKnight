@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/Coin.cs" id="1_pyqbq"]
 [ext_resource type="Texture2D" uid="uid://bqc8btrl70pve" path="res://assets/sprites/coin.png" id="1_vafe3"]
-[ext_resource type="PackedScene" uid="uid://dy5idort7v1mp" path="res://Common/Components/Pickable/pickable.tscn" id="3_ykact"]
+[ext_resource type="PackedScene" uid="uid://esn5lsl4fp3m" path="res://Common/Components/Pickables/ValuePickable/value_pickable.tscn" id="3_q2j2c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cgnew"]
 atlas = ExtResource("1_vafe3")
@@ -96,7 +96,7 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_03jj0"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_5x4sa"]
 radius = 5.0
 
 [node name="Coin" type="Node2D"]
@@ -106,10 +106,10 @@ script = ExtResource("1_pyqbq")
 sprite_frames = SubResource("SpriteFrames_rnqc3")
 autoplay = "default"
 
-[node name="Pickable" parent="." instance=ExtResource("3_ykact")]
-position = Vector2(0, -1)
+[node name="ValuePickable" parent="." node_paths=PackedStringArray("RemovableNode") instance=ExtResource("3_q2j2c")]
+Value = 1
 RemoveOnPick = true
+RemovableNode = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickable"]
-position = Vector2(0, 1)
-shape = SubResource("CircleShape2D_03jj0")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ValuePickable"]
+shape = SubResource("CircleShape2D_5x4sa")

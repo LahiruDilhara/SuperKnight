@@ -1,12 +1,11 @@
-using Components;
+using Components.Pickables;
 using Godot;
-using System;
 
 public partial class Coin : Node2D
 {
 	public override void _Ready()
 	{
-		var node = GetNode<Pickable>("Pickable");
+		var node = GetNode<Pickable>("ValuePickable");
 		node.NodeType = typeof(Player.Player);
 		node.Pick += CoinCollectCallable;
 	}
@@ -20,7 +19,7 @@ public partial class Coin : Node2D
 	{
 	}
 
-	private void CoinCollectCallable(Node2D body)
+	private void CoinCollectCallable()
 	{
 		GD.Print("Call the callable in coin");
 	}

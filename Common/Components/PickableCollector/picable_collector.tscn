@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3jyk7vx1sg8n"]
+
+[ext_resource type="Script" path="res://Common/Components/PickableCollector/PicableCollector.cs" id="1_jfsac"]
+
+[node name="PicableCollectorBox" type="Area2D"]
+script = ExtResource("1_jfsac")

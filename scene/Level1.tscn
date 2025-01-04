@@ -400,8 +400,6 @@ zoom = Vector2(3, 3)
 limit_bottom = 160
 position_smoothing_enabled = true
 
-[node name="GameStatus" parent="Player" instance=ExtResource("6_7a3c1")]
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="SlimeGreen" parent="Enemies" instance=ExtResource("7_l8pim")]
@@ -427,3 +425,5 @@ Amount = 100
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContinousRetainHeal"]
 position = Vector2(34.5, 20)
 shape = SubResource("RectangleShape2D_1hcne")
+
+[node name="GameStatus" parent="." instance=ExtResource("6_7a3c1")]
