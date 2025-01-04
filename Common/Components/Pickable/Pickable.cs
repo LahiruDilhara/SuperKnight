@@ -8,6 +8,7 @@ namespace Components.Pickables
 		[Signal]
 		public delegate void PickEventHandler();
 
+		[Export]
 		public Node PickedNode { get; private set; } = null;
 
 		[Export]
