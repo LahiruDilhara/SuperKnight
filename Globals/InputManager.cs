@@ -14,7 +14,7 @@ namespace Globals
         // store all the actions
         private Dictionary<string, bool> Actions = new Dictionary<string, bool>();
 
-        private bool InputEnable = true;
+        public bool InputEnable = true;
 
         public override void _Ready()
         {
