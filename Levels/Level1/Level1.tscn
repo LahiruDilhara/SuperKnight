@@ -1,18 +1,18 @@
 [gd_scene load_steps=22 format=4 uid="uid://b2812l1sr3jn0"]
 
-[ext_resource type="Script" path="res://scripts/Level1.cs" id="1_2xsj0"]
-[ext_resource type="Texture2D" uid="uid://1se48xpncrh4" path="res://assets/sprites/world_tileset.png" id="1_7eihb"]
-[ext_resource type="PackedScene" uid="uid://gq6cvi4fephq" path="res://scene/platform.tscn" id="2_bwxh6"]
-[ext_resource type="PackedScene" uid="uid://deyfnevy3byu" path="res://scene/coin.tscn" id="3_5k3qt"]
-[ext_resource type="PackedScene" uid="uid://diy1xal6yv46a" path="res://scene/kill_zone.tscn" id="4_jtl16"]
-[ext_resource type="PackedScene" uid="uid://bxmm025rhtwmi" path="res://Player/player.tscn" id="5_eauda"]
-[ext_resource type="PackedScene" uid="uid://d2gxiq47dys5k" path="res://scene/game_status.tscn" id="6_7a3c1"]
-[ext_resource type="PackedScene" uid="uid://b8h1ntnsvbxl1" path="res://scene/slime_green.tscn" id="7_l8pim"]
-[ext_resource type="PackedScene" uid="uid://bxa50r4srtpv6" path="res://Common/Components/Damage/ContinousDamage/continous_damage.tscn" id="9_fg3pt"]
-[ext_resource type="PackedScene" uid="uid://c4grlat0ai5xu" path="res://Common/Components/Heal/ContinousRetainHeal/continous_retain_heal.tscn" id="10_ksu4d"]
+[ext_resource type="Script" path="res://Levels/Level1/Level1.cs" id="1_dvgif"]
+[ext_resource type="Texture2D" uid="uid://1se48xpncrh4" path="res://assets/sprites/world_tileset.png" id="2_n8m4l"]
+[ext_resource type="PackedScene" uid="uid://deyfnevy3byu" path="res://Coin/coin.tscn" id="3_moetn"]
+[ext_resource type="PackedScene" uid="uid://gq6cvi4fephq" path="res://scene/platform.tscn" id="4_xlepu"]
+[ext_resource type="PackedScene" uid="uid://diy1xal6yv46a" path="res://scene/kill_zone.tscn" id="5_qluwu"]
+[ext_resource type="PackedScene" uid="uid://bxmm025rhtwmi" path="res://Player/player.tscn" id="6_5yxa1"]
+[ext_resource type="PackedScene" uid="uid://b8h1ntnsvbxl1" path="res://scene/slime_green.tscn" id="7_i6k2f"]
+[ext_resource type="PackedScene" uid="uid://bxa50r4srtpv6" path="res://Common/Components/Damage/ContinousDamage/continous_damage.tscn" id="8_rjt6s"]
+[ext_resource type="PackedScene" uid="uid://c4grlat0ai5xu" path="res://Common/Components/Heal/ContinousRetainHeal/continous_retain_heal.tscn" id="9_ys70m"]
+[ext_resource type="PackedScene" uid="uid://d2gxiq47dys5k" path="res://scene/game_status.tscn" id="10_32nlx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pk36o"]
-texture = ExtResource("1_7eihb")
+texture = ExtResource("2_n8m4l")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -139,7 +139,7 @@ texture = ExtResource("1_7eihb")
 sources/0 = SubResource("TileSetAtlasSource_pk36o")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_54uk3"]
-texture = ExtResource("1_7eihb")
+texture = ExtResource("2_n8m4l")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -303,7 +303,7 @@ texture = ExtResource("1_7eihb")
 2:4/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_syu34"]
-scenes/1/scene = ExtResource("3_5k3qt")
+scenes/1/scene = ExtResource("3_moetn")
 
 [sub_resource type="TileSet" id="TileSet_ecuyt"]
 physics_layer_0/collision_layer = 8
@@ -358,7 +358,7 @@ size = Vector2(110, 20)
 size = Vector2(49, 20)
 
 [node name="Level1" type="Node2D"]
-script = ExtResource("1_2xsj0")
+script = ExtResource("1_dvgif")
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -374,7 +374,7 @@ tile_set = SubResource("TileSet_ecuyt")
 
 [node name="Platforms" type="Node2D" parent="."]
 
-[node name="Platform" parent="Platforms" instance=ExtResource("2_bwxh6")]
+[node name="Platform" parent="Platforms" instance=ExtResource("4_xlepu")]
 position = Vector2(737, 133)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform"]
@@ -383,16 +383,16 @@ libraries = {
 }
 autoplay = "new_animation"
 
-[node name="Platform2" parent="Platforms" instance=ExtResource("2_bwxh6")]
+[node name="Platform2" parent="Platforms" instance=ExtResource("4_xlepu")]
 position = Vector2(-34, -55)
 
-[node name="KillZone" parent="." instance=ExtResource("4_jtl16")]
+[node name="KillZone" parent="." instance=ExtResource("5_qluwu")]
 position = Vector2(505, 337)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
 shape = SubResource("WorldBoundaryShape2D_h61ny")
 
-[node name="Player" parent="." instance=ExtResource("5_eauda")]
+[node name="Player" parent="." instance=ExtResource("6_5yxa1")]
 position = Vector2(-38, -3)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -402,13 +402,13 @@ position_smoothing_enabled = true
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="SlimeGreen" parent="Enemies" instance=ExtResource("7_l8pim")]
+[node name="SlimeGreen" parent="Enemies" instance=ExtResource("7_i6k2f")]
 position = Vector2(1006, 127)
 
-[node name="SlimeGreen2" parent="Enemies" instance=ExtResource("7_l8pim")]
+[node name="SlimeGreen2" parent="Enemies" instance=ExtResource("7_i6k2f")]
 position = Vector2(541, -17)
 
-[node name="ContinousDamage" parent="." instance=ExtResource("9_fg3pt")]
+[node name="ContinousDamage" parent="." instance=ExtResource("8_rjt6s")]
 Incremental = 100
 Amount = 100
 
@@ -416,7 +416,7 @@ Amount = 100
 position = Vector2(202, 18)
 shape = SubResource("RectangleShape2D_adg3c")
 
-[node name="ContinousRetainHeal" parent="." instance=ExtResource("10_ksu4d")]
+[node name="ContinousRetainHeal" parent="." instance=ExtResource("9_ys70m")]
 UseIncrementedHeal = true
 RepeatCount = 5
 Incremental = 100
@@ -426,4 +426,4 @@ Amount = 100
 position = Vector2(34.5, 20)
 shape = SubResource("RectangleShape2D_1hcne")
 
-[node name="GameStatus" parent="." instance=ExtResource("6_7a3c1")]
+[node name="GameStatus" parent="." instance=ExtResource("10_32nlx")]
