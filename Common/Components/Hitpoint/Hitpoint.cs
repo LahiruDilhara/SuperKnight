@@ -63,8 +63,9 @@ namespace Components
 			this.CurrentHitpoints = this.MaxHitpoints;
 		}
 
-		public void InitializeHitpoints()
+		public void Initialize(int MaxHitpoints)
 		{
+			this.MaxHitpoints = MaxHitpoints;
 			this.CurrentHitpoints = MaxHitpoints;
 		}
 

@@ -1,4 +1,5 @@
 using Components;
+using Globals;
 using Godot;
 using System;
 
@@ -30,9 +31,12 @@ namespace Player
 			this.hitbox = GetNode<Hitbox>("Hitbox");
 
 
-
+			// Initialize the Hitpoint component
+			this.hitpoint.Initialize(GameManager.Instance.PlayerMaxHitpoints);
 			this.hitpoint.HitpointChange += HitpointChange;
 			hitpoint.Died += Dead;
+
+
 
 			stateMachine.Initialize(character: this, Animation: Animation);
 		}
