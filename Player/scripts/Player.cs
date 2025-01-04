@@ -17,22 +17,28 @@ namespace Player
 		private StateMachine stateMachine;
 
 		private Hitpoint hitpoint;
+		private HealBox healBox;
+		private Hitbox hitbox;
 
-		public void Init()
+		public override void _Ready()
 		{
+			base._Ready();
 			this.Animation = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 			this.stateMachine = GetNode<StateMachine>("StateMachine");
 			this.hitpoint = GetNode<Hitpoint>("Hitpoint");
+			this.healBox = GetNode<HealBox>("HealBox");
+			this.hitbox = GetNode<Hitbox>("Hitbox");
+
 
 
 			this.hitpoint.HitpointChange += HitpointChange;
 			hitpoint.Died += Dead;
+
+			stateMachine.Initialize(character: this, Animation: Animation);
 		}
-		public override void _Ready()
+		public void Initialize()
 		{
-			base._Ready();
-			Init();
-			stateMachine.Init(character: this, Animation: Animation);
+
 		}
 
 		public override void _PhysicsProcess(double delta)

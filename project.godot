@@ -17,7 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+GameManager="*res://Globals/GameManager.cs"
 InputManager="*res://Globals/InputManager.cs"
+MessageBus="*res://Globals/MessageBus.cs"
 
 [dotnet]
 

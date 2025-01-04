@@ -18,7 +18,7 @@ namespace Player
 		[Export]
 		private IController controller;
 
-		public void Init(CharacterBody2D character, AnimatedSprite2D Animation = null)
+		public void Initialize(CharacterBody2D character, AnimatedSprite2D Animation = null)
 		{
 			this.Character = character;
 			this.Animation = Animation;
