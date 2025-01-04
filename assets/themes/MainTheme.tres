@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dxd2tl8svd2xh"]
+
+[ext_resource type="FontFile" uid="uid://316ng3optuw8" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_ca6uf"]
+[ext_resource type="FontFile" uid="uid://cmc70ja8648ls" path="res://assets/fonts/PixelOperator8.ttf" id="1_kmpns"]
+
+[resource]
+Button/fonts/font = ExtResource("1_ca6uf")
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_kmpns")
+LineEdit/fonts/font = ExtResource("1_kmpns")
+ProgressBar/fonts/font = ExtResource("1_kmpns")
+TabBar/fonts/font = ExtResource("1_kmpns")
+Tree/fonts/font = ExtResource("1_kmpns")
+Tree/fonts/title_button_font = ExtResource("1_ca6uf")
