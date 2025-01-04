@@ -5,7 +5,7 @@ using System;
 public partial class HealBox : Area2D
 {
 	[Signal]
-	public delegate void OnHealEventHandler(Heal healComponent);
+	public delegate void OnHealEventHandler(int healAmount);
 
 	[Export]
 	public Hitpoint Hitpoint;
