@@ -62,7 +62,7 @@ namespace Globals
             MessageBus.Instance.EmitScoreChanged(this.PlayerScore);
         }
 
-        public void SetHitpoints(int currentHitpoints)
+        public void SetCurrentHitpoints(int currentHitpoints)
         {
             this.PlayerCurrentHitpoints = currentHitpoints;
             MessageBus.Instance.EmitHitpointChanged(currentHitpoints, this.PlayerMaxHitpoints);

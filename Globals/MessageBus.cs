@@ -46,6 +46,20 @@ namespace Globals
         {
             EmitSignal(nameof(this.ScoreChanged), score);
         }
-    }
 
+        public void ConnectSignal(string signalName, Callable callable)
+        {
+            if (!this.IsConnected(signalName, callable))
+            {
+                this.Connect(signalName, callable);
+            }
+        }
+        public void DisconnectSignal(string signalName, Callable callable)
+        {
+            if (this.IsConnected(signalName, callable))
+            {
+                this.Disconnect(signalName, callable);
+            }
+        }
+    }
 }
