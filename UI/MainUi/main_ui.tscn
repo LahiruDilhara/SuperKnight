@@ -1,4 +1,10 @@
-[gd_scene format=3 uid="uid://c0uxtg88hoyu4"]
+[gd_scene load_steps=3 format=3 uid="uid://c0uxtg88hoyu4"]
+
+[ext_resource type="Texture2D" uid="uid://bn5jchkaecpp0" path="res://UI/MainUi/assets/images/StartSceneBackground.png" id="1_53sbb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_55w01"]
+texture = ExtResource("1_53sbb")
+modulate_color = Color(0.29219, 0.29219, 0.29219, 1)
 
 [node name="MainUI" type="Control"]
 layout_mode = 3
@@ -7,3 +13,44 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_55w01")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 70
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "Super King"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 50
+
+[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Start"
+
+[node name="Button2" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Exit"

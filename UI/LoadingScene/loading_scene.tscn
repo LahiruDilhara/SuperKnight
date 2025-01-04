@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://b24wocassgw4"]
+
+[node name="LoadingScene" type="CanvasLayer"]
