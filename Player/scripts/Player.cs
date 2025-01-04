@@ -33,10 +33,18 @@ namespace Player
 
 			// Initialize the Hitpoint component
 			this.hitpoint.Initialize(GameManager.Instance.PlayerMaxHitpoints);
-			this.hitpoint.HitpointChange += HitpointChange;
-			hitpoint.Died += Dead;
 
-
+			// Connect with signals
+			// Connect with hitpoint component hitpoint change signal
+			if (!hitpoint.IsConnected(nameof(hitpoint.HitpointChange), new Callable(this, nameof(this.OnHitpointChange))))
+			{
+				hitpoint.Connect(nameof(hitpoint.HitpointChange), new Callable(this, nameof(this.OnHitpointChange)));
+			}
+			// Connect with hitpoint component died signal
+			if (!hitpoint.IsConnected(nameof(hitpoint.Died), new Callable(this, nameof(this.OnDead))))
+			{
+				hitpoint.Connect(nameof(hitpoint.Died), new Callable(this, nameof(this.OnDead)));
+			}
 
 			stateMachine.Initialize(character: this, Animation: Animation);
 		}
@@ -60,15 +68,14 @@ namespace Player
 			this.stateMachine.Input(@event);
 		}
 
-		public void HitpointChange(int hitpoints)
+		// Signal Handlers
+		private void OnHitpointChange(int currentHitpoint)
 		{
-			GD.Print($"The hitpoints are {hitpoints}");
+			GameManager.Instance.SetCurrentHitpoints(currentHitpoint);
 		}
-
-		public void Dead()
+		private void OnDead()
 		{
-			GD.Print($"The player over");
+
 		}
 	}
-
 }
