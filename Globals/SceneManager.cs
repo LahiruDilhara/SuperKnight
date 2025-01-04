@@ -34,7 +34,7 @@ namespace Globals
             LoadScene(StartingScene);
         }
 
-        public async void LoadScene(string scenePath, Node superNode = null)
+        public async void LoadScene(string scenePath, Node superNode = null, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
         {
             LoadingScene loadingScene = (LoadingScene)LoadingScrene.Instantiate();
 
@@ -45,7 +45,7 @@ namespace Globals
             await ToSignal(loadingScene, "ready");
 
             // If added then play the animation
-            await loadingScene.PlayAnimation("slide_in");
+            await loadingScene.PlayAnimation(inAnimationName);
 
             // If supply super node then set it
             superNode ??= GetTree().Root;
@@ -69,7 +69,7 @@ namespace Globals
             await ToSignal(CurrentScene, "ready");
 
             // If the loadedScene is added to the tree then run the next animation
-            await loadingScene.PlayAnimation("slide_out");
+            await loadingScene.PlayAnimation(outAnimationName);
 
             // Remove the loading scene after the new scene successfully loaded
             GetTree().Root.CallDeferred("remove_child", loadingScene);
