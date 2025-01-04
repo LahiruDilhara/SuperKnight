@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b24wocassgw4"]
+[gd_scene load_steps=8 format=3 uid="uid://b24wocassgw4"]
+
+[ext_resource type="Script" path="res://UI/LoadingScene/LoadingScene.cs" id="1_e0t1r"]
 
 [sub_resource type="Animation" id="Animation_1j6yw"]
 length = 0.001
@@ -149,6 +151,7 @@ _data = {
 }
 
 [node name="LoadingScene" type="CanvasLayer"]
+script = ExtResource("1_e0t1r")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
