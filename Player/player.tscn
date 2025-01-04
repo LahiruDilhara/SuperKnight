@@ -1,6 +1,6 @@
 [gd_scene load_steps=38 format=3 uid="uid://bxmm025rhtwmi"]
 
-[ext_resource type="Texture2D" uid="uid://88bllxa6gxim" path="res://assets/sprites/knight.png" id="1_1livn"]
+[ext_resource type="Texture2D" uid="uid://88bllxa6gxim" path="res://Player/assets/sprites/knight.png" id="1_1livn"]
 [ext_resource type="Script" path="res://Player/scripts/Player.cs" id="1_4t06a"]
 [ext_resource type="PackedScene" uid="uid://wjmj0e2lkoq0" path="res://Common/Components/Hitbox/hitbox.tscn" id="3_3d4up"]
 [ext_resource type="PackedScene" uid="uid://cf8etax2scmb0" path="res://Common/Components/Hitpoint/hitpoint.tscn" id="3_bso02"]
