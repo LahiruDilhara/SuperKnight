@@ -87,6 +87,11 @@ namespace Globals
             tree.ChangeSceneToFile(scenePath);
         }
 
+        public void ExitGame()
+        {
+            GetTree().Quit();
+        }
+
         // create a level manager or scene manager. which replace the current scene from the root sceen node.
 
         public enum GameState
