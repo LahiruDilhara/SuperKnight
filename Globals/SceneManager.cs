@@ -68,11 +68,12 @@ namespace Globals
             CurrentScene = loadedScene.Instantiate();
             superNode.CallDeferred("add_child", CurrentScene);
 
-            // Disable the new scene's processing and animations temporarily
-            PauseScene(CurrentScene);
 
             // Wait until the new scene is successfully loaded and added to the tree
             await ToSignal(CurrentScene, "ready");
+
+            // Disable the new scene's processing and animations temporarily
+            PauseScene(CurrentScene);
 
             // If the loadedScene is added to the tree then run the next animation
             await loadingScene.PlayAnimation(outAnimationName);
@@ -92,12 +93,25 @@ namespace Globals
             node.SetProcess(false);
             node.SetProcessInput(false);
             node.SetPhysicsProcess(false);
+            node.SetProcessInternal(false);
+            node.SetPhysicsProcessInternal(false);
+
+            foreach (Node subNode in node.GetChildren())
+            {
+                PauseScene(subNode);
+            }
         }
         private static void UnPauseScene(Node node)
         {
             node.SetProcess(true);
             node.SetProcessInput(true);
             node.SetPhysicsProcess(true);
+            node.SetProcessInternal(true);
+            node.SetPhysicsProcessInternal(true);
+            foreach (Node subNode in node.GetChildren())
+            {
+                UnPauseScene(subNode);
+            }
         }
     }
 }
