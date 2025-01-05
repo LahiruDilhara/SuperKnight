@@ -21,6 +21,12 @@ namespace Globals
         [Signal]
         public delegate void GameFinishedEventHandler();
 
+        [Signal]
+        public delegate void LevelChangedEventHandler(int levelNumber);
+
+        [Signal]
+        public delegate void LevelReloadedEventHandler(int levelNumber);
+
         public override void _Ready()
         {
             base._Ready();
@@ -53,6 +59,14 @@ namespace Globals
         public void EmitGameFinished()
         {
             EmitSignal(nameof(this.GameFinished));
+        }
+        public void EmitLevelChanged(int levelNumber)
+        {
+            EmitSignal(nameof(this.LevelChanged), levelNumber);
+        }
+        public void EmitLevelReloaded(int levelNumber)
+        {
+            EmitSignal(nameof(this.LevelReloaded), levelNumber);
         }
 
         public void ConnectSignal(string signalName, Callable callable)
