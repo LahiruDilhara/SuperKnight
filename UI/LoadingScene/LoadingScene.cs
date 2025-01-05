@@ -2,26 +2,29 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 
-public partial class LoadingScene : CanvasLayer
+namespace UI
 {
-	private AnimationPlayer animationPlayer;
-	public override void _Ready()
+	public partial class LoadingScene : CanvasLayer
 	{
-		this.animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-	}
-
-	public async Task PlayAnimation(string animationName)
-	{
-		this.animationPlayer.Play(animationName);
-		var tcs = new TaskCompletionSource<bool>();
-
-		animationPlayer.AnimationFinished += (animName) =>
+		private AnimationPlayer animationPlayer;
+		public override void _Ready()
 		{
-			if (animName == animationName)
+			this.animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		}
+
+		public async Task PlayAnimation(string animationName)
+		{
+			this.animationPlayer.Play(animationName);
+			var tcs = new TaskCompletionSource<bool>();
+
+			animationPlayer.AnimationFinished += (animName) =>
 			{
-				tcs.SetResult(true);
-			}
-		};
-		await tcs.Task;
+				if (animName == animationName)
+				{
+					tcs.SetResult(true);
+				}
+			};
+			await tcs.Task;
+		}
 	}
 }
