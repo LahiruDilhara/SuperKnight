@@ -20,6 +20,7 @@ GameManager="*res://Globals/GameManager.cs"
 InputManager="*res://Globals/InputManager.cs"
 MessageBus="*res://Globals/MessageBus.cs"
 SceneManager="*res://Globals/SceneManager.cs"
+LevelManager="*res://Globals/LevelManager.cs"
 
 [display]
 
