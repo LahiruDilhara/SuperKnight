@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bxmm025rhtwmi"]
+[gd_scene load_steps=39 format=3 uid="uid://bxmm025rhtwmi"]
 
 [ext_resource type="Texture2D" uid="uid://88bllxa6gxim" path="res://Player/assets/sprites/knight.png" id="1_1livn"]
 [ext_resource type="Script" path="res://Player/scripts/Player.cs" id="1_4t06a"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c67uy34mmsouw" path="res://Common/Components/HealBox/heal_box.tscn" id="11_su10i"]
 [ext_resource type="PackedScene" uid="uid://3jyk7vx1sg8n" path="res://Common/Components/PickableCollector/picable_collector.tscn" id="12_85em3"]
 [ext_resource type="PackedScene" uid="uid://lgx22i7im7b4" path="res://Common/Controllers/UserInputController/user_input_controller.tscn" id="12_y6xgq"]
+[ext_resource type="PackedScene" uid="uid://c27r5180ply00" path="res://Common/Components/Display/HealthProgress/health_progress.tscn" id="13_cnx5j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fldyf"]
 atlas = ExtResource("1_1livn")
@@ -262,3 +263,11 @@ InAirProjectionSpeed = 150
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PicableCollector"]
 position = Vector2(-0.5, -9.5)
 shape = SubResource("RectangleShape2D_y220i")
+
+[node name="HealthProgress" parent="." node_paths=PackedStringArray("hitpoint") instance=ExtResource("13_cnx5j")]
+custom_minimum_size = Vector2(10, 2)
+offset_left = -13.0
+offset_top = -24.0
+offset_right = 13.0
+offset_bottom = -20.0
+hitpoint = NodePath("../Hitpoint")

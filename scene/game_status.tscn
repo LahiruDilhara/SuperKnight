@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2gxiq47dys5k"]
+[gd_scene load_steps=2 format=3 uid="uid://d2gxiq47dys5k"]
 
 [ext_resource type="FontFile" uid="uid://316ng3optuw8" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_0kv3g"]
-[ext_resource type="Texture2D" uid="uid://044y8dmmf0te" path="res://assets/images/heart.png" id="2_axvf5"]
 
 [node name="GameStatus" type="CanvasLayer"]
 metadata/_edit_vertical_guides_ = [-1641.0]
@@ -30,42 +29,3 @@ theme_override_font_sizes/font_size = 30
 text = "Score
 "
 horizontal_alignment = 1
-
-[node name="MarginContainer2" type="MarginContainer" parent="." groups=["Ui"]]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -40.0
-offset_right = 240.0
-grow_vertical = 0
-scale = Vector2(0.676902, 0.656529)
-theme_override_constants/margin_left = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="TextureRect" type="TextureRect" parent="MarginContainer2/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_axvf5")
-expand_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="MarginContainer2/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_axvf5")
-expand_mode = 2
-
-[node name="TextureRect3" type="TextureRect" parent="MarginContainer2/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_axvf5")
-expand_mode = 2
-
-[node name="TextureRect4" type="TextureRect" parent="MarginContainer2/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_axvf5")
-expand_mode = 2
-
-[node name="TextureRect5" type="TextureRect" parent="MarginContainer2/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_axvf5")
-expand_mode = 2
