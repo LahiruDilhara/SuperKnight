@@ -1,11 +1,13 @@
 using Godot;
 using System;
+using Types;
 
-public partial class Level1 : Node2D
+public partial class Level1 : Level
 {
 
 
-	private void init(){
+	private void init()
+	{
 	}
 	public override void _Ready()
 	{

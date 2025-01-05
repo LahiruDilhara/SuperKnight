@@ -357,7 +357,7 @@ size = Vector2(110, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1hcne"]
 size = Vector2(49, 20)
 
-[node name="Level1" type="Node2D"]
+[node name="Level1" type="Node"]
 script = ExtResource("1_dvgif")
 
 [node name="Layers" type="Node2D" parent="."]
