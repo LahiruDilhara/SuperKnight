@@ -36,9 +36,8 @@ namespace Globals
 
         public async void LoadScene(string scenePath, Node superNode = null, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
         {
-            // Disable Global Inputs and pause the tree
+            // Disable Global Inputs
             InputManager.Instance.InputEnable = false;
-            GetTree().Paused = true;
 
             LoadingScene loadingScene = (LoadingScene)LoadingScrene.Instantiate();
 
@@ -78,9 +77,8 @@ namespace Globals
             // Remove the loading scene after the new scene successfully loaded
             GetTree().Root.CallDeferred("remove_child", loadingScene);
 
-            // Enable Global Inputs and resume the tree
+            // Enable Global Inputs
             InputManager.Instance.InputEnable = true;
-            GetTree().Paused = false;
         }
     }
 }
