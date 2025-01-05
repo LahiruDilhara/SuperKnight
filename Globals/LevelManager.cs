@@ -10,12 +10,12 @@ namespace Globals
 
         private int CurrentLevelIndex = 0;
 
+        private List<string> LevelScenes = new List<string> { "res://Levels/Level1/Level1.tscn" };
+
         public int CurrentLevel
         {
             get => this.CurrentLevelIndex + 1;
         }
-
-        private List<string> LevelScenes = new List<string> { "res://Levels/Level1/Level1.tscn" };
 
         // This was initialized by the level Manager using the saved data
         public void Initialized(int CurrentLevel)
@@ -58,6 +58,7 @@ namespace Globals
             CurrentLevelIndex = LevelIndex;
 
             SceneManager.Instance.LoadScene(levelScenePath);
+            MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
         }
 
         /// <summary>
@@ -66,6 +67,7 @@ namespace Globals
         public void ReloadLevel()
         {
             SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
+            MessageBus.Instance.EmitLevelReloaded(CurrentLevelIndex + 1);
         }
 
         /// <summary>
@@ -81,6 +83,7 @@ namespace Globals
             }
             this.CurrentLevelIndex = nextLevelIndex;
             SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
+            MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
         }
 
         /// <summary>
@@ -96,6 +99,7 @@ namespace Globals
             }
             this.CurrentLevelIndex = previousLevelIndex;
             SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
+            MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
         }
     }
 }
