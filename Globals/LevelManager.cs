@@ -10,6 +10,11 @@ namespace Globals
 
         private int CurrentLevelIndex = 0;
 
+        public int CurrentLevel
+        {
+            get => this.CurrentLevelIndex + 1;
+        }
+
         private List<string> LevelScenes = new List<string> { "res://Levels/Level1/Level1.tscn" };
 
         public override void _Ready()
@@ -41,19 +46,18 @@ namespace Globals
 
         public void ReloadLevel()
         {
-            if (CurrentLevelIndex >= 0)
-            {
-                SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
-            }
+            SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
         }
 
         public void LoadNextLevel()
         {
-            if (CurrentLevelIndex >= 0)
+            var nextLevelIndex = this.CurrentLevelIndex + 1;
+            if (nextLevelIndex >= this.LevelScenes.Count)
             {
-                
-                SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
+                MessageBus.Instance.EmitGameFinished();
+                return;
             }
+            SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
         }
     }
 }
