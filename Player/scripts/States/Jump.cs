@@ -38,7 +38,7 @@ namespace Player
 				ChangeState(Idle);
 				return;
 			}
-			else if (Character.Velocity.Y < 0f)
+			else if (Character.Velocity.Y > 0f)
 			{
 				ChangeState(Fall);
 				return;

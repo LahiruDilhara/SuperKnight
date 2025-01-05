@@ -23,6 +23,5 @@ public partial class Fall : InAir
 			ChangeState(Idle);
 			return;
 		}
-
 	}
 }
