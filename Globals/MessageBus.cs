@@ -18,6 +18,9 @@ namespace Globals
         [Signal]
         public delegate void ScoreChangedEventHandler(int score);
 
+        [Signal]
+        public delegate void GameFinishedEventHandler();
+
         public override void _Ready()
         {
             base._Ready();
@@ -45,6 +48,11 @@ namespace Globals
         public void EmitScoreChanged(int score)
         {
             EmitSignal(nameof(this.ScoreChanged), score);
+        }
+
+        public void EmitGameFinished()
+        {
+            EmitSignal(nameof(this.GameFinished));
         }
 
         public void ConnectSignal(string signalName, Callable callable)
