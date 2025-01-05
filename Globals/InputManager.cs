@@ -27,7 +27,7 @@ namespace Globals
             }
             Instance = this;
             InitilizeDefaultActions();
-            GD.Print("The Input Manager Initialized");
+            GD.Print("InputManager Initialized");
         }
 
         /// <summary>
