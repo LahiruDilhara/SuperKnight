@@ -16,7 +16,7 @@ corner_radius_bottom_left = 5
 anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1j1r4"]
-bg_color = Color(0, 0.27, 0.6, 1)
+bg_color = Color(0.1485, 0.81, 0, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -46,5 +46,4 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_soamx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_1j1r4")
-value = 50.0
 show_percentage = false
