@@ -24,7 +24,7 @@ public partial class MainUi : Control
 
 	private void OnStart()
 	{
-		SceneManager.Instance.LoadScene("res://Levels/Level1/Level1.tscn",inAnimationName:"slide_in",outAnimationName:"slide_out");
+		LevelManager.Instance.LoadCurrentLevel();
 	}
 
 	private void OnExit()
