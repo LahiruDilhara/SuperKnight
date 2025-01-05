@@ -24,8 +24,4 @@ public partial class LoadingScene : CanvasLayer
 		};
 		await tcs.Task;
 	}
-
-	public override void _Process(double delta)
-	{
-	}
 }
