@@ -57,7 +57,7 @@ namespace Globals
             CurrentScene?.QueueFree();
 
             // Run code asyncronously to load the new scene
-            var loadedScene = await Task.Run(() => GD.Load<PackedScene>(scenePath));
+            var loadedScene = await LoadSceneAsync(scenePath);
             if (loadedScene == null)
             {
                 GD.PrintErr($"Failed to load the scene: ${loadedScene}");
@@ -86,6 +86,11 @@ namespace Globals
 
             // Unpause the new scene
             UnPauseScene(CurrentScene);
+        }
+
+        private static async Task<PackedScene> LoadSceneAsync(string scenePath)
+        {
+            return await Task.Run(() => GD.Load<PackedScene>(scenePath));
         }
 
         private static void PauseScene(Node node)
