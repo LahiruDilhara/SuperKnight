@@ -15,6 +15,12 @@ namespace Globals
 
         private Node CurrentScene = null;
 
+        public void Initialize(string startingScenePath = "res://UI/MainUi/main_ui.tscn", string loadingScenePath = "res://UI/LoadingScene/loading_scene.tscn")
+        {
+            // TODO: This starting Scnene should be loaded by the game manager using this scene manager, it is not a reponsibility of scene manager to load it.
+
+        }
+
         public override void _Ready()
         {
             base._Ready();
@@ -57,7 +63,7 @@ namespace Globals
             CurrentScene?.QueueFree();
 
             // Run code asyncronously to load the new scene
-            var loadedScene = await LoadSceneAsync(scenePath);
+            var loadedScene = await LoadPackedSceneAsync(scenePath);
             if (loadedScene == null)
             {
                 GD.PrintErr($"Failed to load the scene: ${loadedScene}");
@@ -88,7 +94,7 @@ namespace Globals
             UnPauseScene(CurrentScene);
         }
 
-        private static async Task<PackedScene> LoadSceneAsync(string scenePath)
+        private static async Task<PackedScene> LoadPackedSceneAsync(string scenePath)
         {
             return await Task.Run(() => GD.Load<PackedScene>(scenePath));
         }
