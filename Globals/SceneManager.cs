@@ -99,6 +99,26 @@ namespace Globals
             return await Task.Run(() => GD.Load<PackedScene>(scenePath));
         }
 
+        private async Task<Node> LoadSceneToTree(string scenePath, Node rootNode)
+        {
+            var packedScene = await LoadPackedSceneAsync(scenePath);
+            Node scene = packedScene.Instantiate();
+            rootNode.CallDeferred("add_child", scene);
+
+            // Await until the node is entered to the tree
+            await ToSignal(scene, "tree_entered");
+
+            // Await until the node's _Ready method called
+            await ToSignal(scene, "ready");
+
+            return scene;
+        }
+
+        private async Task RemoveSceneFromTree(Node node, Node rootNode, bool awaitUntilRemoved)
+        {
+            rootNode.CallDeferred("remove_child", node);
+        }
+
         private static void PauseScene(Node node)
         {
             node.SetProcess(false);
