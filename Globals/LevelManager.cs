@@ -37,14 +37,14 @@ namespace Globals
 
         public void LoadCurrentLevel(Node removeNode = null)
         {
-            LoadLevel(this.CurrentLevelIndex + 1);
+            LoadLevel(this.CurrentLevelIndex + 1, removeNode: removeNode);
         }
 
         /// <summary>
         /// This method is responsible for loading specified level. If the level number is greater than the available levels, it loads the last level. If it is less than 1, it loads the first level.
         /// </summary>
         /// <param name="LevelNumber"></param>
-        public void LoadLevel(int LevelNumber)
+        public void LoadLevel(int LevelNumber, Node removeNode = null)
         {
             if (LevelNumber > LevelScenes.Count)
             {
@@ -61,7 +61,7 @@ namespace Globals
             var levelScenePath = LevelScenes[LevelIndex];
             CurrentLevelIndex = LevelIndex;
 
-            SceneManager.Instance.LoadScene(levelScenePath);
+            SceneManager.Instance.LoadScene(levelScenePath, RemoveNode: removeNode);
             MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
         }
 

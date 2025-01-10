@@ -24,7 +24,7 @@ public partial class MainUi : Control
 
 	private void OnStart()
 	{
-		LevelManager.Instance.LoadCurrentLevel();
+		LevelManager.Instance.LoadCurrentLevel(removeNode: this);
 	}
 
 	private void OnExit()
