@@ -13,14 +13,11 @@ namespace Globals
 
         private LoadingScene LoadingScene;
 
-        // Preload the loading screne
-        private PackedScene LoadingScrene = GD.Load<PackedScene>("res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn");
-
         public static SceneManager Instance { get; private set; }
 
         private Node CurrentScene = null;
 
-        public void Initialize(string startingScenePath = "res://UI/MainUi/main_ui.tscn", string loadingScenePath = "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn")
+        public void Initialize(string loadingScenePath = "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn")
         {
             // TODO: This starting Scnene should be loaded by the game manager using this scene manager, it is not a reponsibility of scene manager to load it.
 
@@ -40,9 +37,6 @@ namespace Globals
             // Remove the Game node if it exists and load the startingScene. This Game node is used as place holder to create empty 2D scene in the game.
             var _GameNode = GetNode("/root/Game");
             _GameNode?.QueueFree();
-
-            // Load the default scene
-            LoadScene(StartingScene);
         }
 
         public async void LoadScene(string scenePath, Node superNode = null, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
@@ -62,23 +56,17 @@ namespace Globals
             CurrentScene?.QueueFree();
 
             // Run code asyncronously to load the new scene
-            var loadedScene = await LoadPackedSceneAsync(scenePath);
-            if (loadedScene == null)
+            Node LoadedNewScene = await LoadSceneToTreeAsync(scenePath, superNode);
+
+
+            if (LoadedNewScene == null)
             {
-                GD.PrintErr($"Failed to load the scene: ${loadedScene}");
+                GD.PrintErr($"Failed to load the scene: ${scenePath}");
                 return;
             }
 
-            // Instanciate the new Scene
-            CurrentScene = loadedScene.Instantiate();
-            superNode.CallDeferred("add_child", CurrentScene);
-
-
-            // Wait until the new scene is successfully loaded and added to the tree
-            await ToSignal(CurrentScene, "ready");
-
             // Disable the new scene's processing and animations temporarily
-            PauseScene(CurrentScene);
+            PauseScene(LoadedNewScene);
 
             // If the loadedScene is added to the tree then run the next animation
             await LoadingScene.PlayAnimation(outAnimationName);
@@ -90,7 +78,7 @@ namespace Globals
             InputManager.Instance.InputEnable = true;
 
             // Unpause the new scene
-            UnPauseScene(CurrentScene);
+            UnPauseScene(LoadedNewScene);
         }
 
         private static async Task<PackedScene> LoadPackedSceneAsync(string scenePath)
@@ -101,6 +89,7 @@ namespace Globals
         private async Task<Node> LoadSceneToTreeAsync(string scenePath, Node rootNode)
         {
             var packedScene = await LoadPackedSceneAsync(scenePath);
+
             Node scene = packedScene.Instantiate();
             rootNode.CallDeferred("add_child", scene);
 

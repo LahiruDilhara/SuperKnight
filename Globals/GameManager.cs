@@ -20,6 +20,12 @@ namespace Globals
         // Player Max Hitpoints
         public int PlayerMaxHitpoints { get; private set; } = 2500;
 
+        // This will initialize all other managers
+        private void InitializeManagers()
+        {
+            SceneManager.Instance.Initialize(loadingScenePath: "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn");
+        }
+
         public override void _Ready()
         {
             base._Ready();
@@ -33,6 +39,11 @@ namespace Globals
             }
             Instance = this;
             GD.Print("GameManager Initialized");
+
+            InitializeManagers();
+
+            // Load the Main UI
+            SceneManager.Instance.LoadScene("res://UI/MainUi/main_ui.tscn");
         }
 
         public void ChangeState(GameState newState)
