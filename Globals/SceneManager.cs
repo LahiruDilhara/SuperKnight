@@ -6,10 +6,7 @@ namespace Globals
 {
     public partial class SceneManager : Node
     {
-        // Path to the scene which loaded firstly when the game started
-        private string StartingScene = "res://UI/MainUi/main_ui.tscn";
-
-        private string LoadingScenePath = "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn";
+        private string LoadingScenePath;
 
         private LoadingScene LoadingScene;
 
@@ -19,8 +16,7 @@ namespace Globals
 
         public void Initialize(string loadingScenePath = "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn")
         {
-            // TODO: This starting Scnene should be loaded by the game manager using this scene manager, it is not a reponsibility of scene manager to load it.
-
+            this.LoadingScenePath = loadingScenePath;
         }
 
         public override void _Ready()
@@ -41,10 +37,13 @@ namespace Globals
 
         public async void LoadScene(string scenePath, Node superNode = null, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
         {
+            await LoadTheLoadingScene();
+
+            // Make the Loading Scene Visible
+            this.LoadingScene.Visible = true;
+
             // Disable Global Inputs
             InputManager.Instance.InputEnable = false;
-
-            LoadingScene = (LoadingScene)await LoadSceneToTreeAsync(this.LoadingScenePath, GetTree().Root);
 
             // If added then play the animation
             await LoadingScene.PlayAnimation(inAnimationName);
@@ -58,7 +57,6 @@ namespace Globals
             // Run code asyncronously to load the new scene
             Node LoadedNewScene = await LoadSceneToTreeAsync(scenePath, superNode);
 
-
             if (LoadedNewScene == null)
             {
                 GD.PrintErr($"Failed to load the scene: ${scenePath}");
@@ -71,8 +69,8 @@ namespace Globals
             // If the loadedScene is added to the tree then run the next animation
             await LoadingScene.PlayAnimation(outAnimationName);
 
-            // Remove the loading scene after the new scene successfully loaded
-            GetTree().Root.CallDeferred("remove_child", LoadingScene);
+            // Make the Loading Screen Invisible
+            this.LoadingScene.Visible = false;
 
             // Enable Global Inputs
             InputManager.Instance.InputEnable = true;
@@ -105,6 +103,14 @@ namespace Globals
         private async Task RemoveSceneFromTree(Node node, Node rootNode, bool awaitUntilRemoved)
         {
             rootNode.CallDeferred("remove_child", node);
+        }
+
+        private async Task LoadTheLoadingScene()
+        {
+            if (LoadingScene == null)
+            {
+                LoadingScene = (LoadingScene)await LoadSceneToTreeAsync(this.LoadingScenePath, GetTree().Root);
+            }
         }
 
         private static void PauseScene(Node node)
