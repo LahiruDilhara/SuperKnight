@@ -17,7 +17,6 @@ namespace Globals
             get => this.CurrentLevelIndex + 1;
         }
 
-        // This was initialized by the level Manager using the saved data
         public void Initialized(int CurrentLevel)
         {
             this.CurrentLevelIndex = CurrentLevel - 1;
@@ -36,7 +35,7 @@ namespace Globals
 
         }
 
-        public void LoadCurrentLevel()
+        public void LoadCurrentLevel(Node removeNode = null)
         {
             LoadLevel(this.CurrentLevelIndex + 1);
         }

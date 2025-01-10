@@ -23,6 +23,8 @@ namespace Globals
         // This will initialize all other managers
         private void InitializeManagers()
         {
+            // TODO: This current level number should be get using the save manager.
+            LevelManager.Instance.Initialized(1);
             SceneManager.Instance.Initialize(loadingScenePath: "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn");
         }
 

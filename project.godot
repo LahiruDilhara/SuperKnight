@@ -16,9 +16,9 @@ config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 
 [autoload]
 
-InputManager="*res://Globals/InputManager.cs"
 MessageBus="*res://Globals/MessageBus.cs"
 SceneManager="*res://Globals/SceneManager.cs"
+InputManager="*res://Globals/InputManager.cs"
 LevelManager="*res://Globals/LevelManager.cs"
 GameManager="*res://Globals/GameManager.cs"
 
