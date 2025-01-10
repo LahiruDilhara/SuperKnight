@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://b24wocassgw4"]
 
-[ext_resource type="Script" path="res://UI/LoadingScene/LoadingScene.cs" id="1_e0t1r"]
+[ext_resource type="Script" path="res://UI/LoadingScenes/BlackedLoadingScene/BlackLoadingScene.cs" id="1_ftdwg"]
 
 [sub_resource type="Animation" id="Animation_1j6yw"]
 length = 0.001
@@ -200,7 +200,7 @@ _data = {
 
 [node name="LoadingScene" type="CanvasLayer"]
 layer = 5
-script = ExtResource("1_e0t1r")
+script = ExtResource("1_ftdwg")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

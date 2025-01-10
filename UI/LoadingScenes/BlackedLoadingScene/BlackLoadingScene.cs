@@ -1,8 +1,8 @@
 using Godot;
 using System;
 using System.Threading.Tasks;
-
-public partial class LoadingScene : CanvasLayer
+using Types;
+public partial class BlackLoadingScene : LoadingScene
 {
 	private AnimationPlayer animationPlayer;
 	public override void _Ready()
@@ -10,7 +10,7 @@ public partial class LoadingScene : CanvasLayer
 		this.animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 	}
 
-	public async Task PlayAnimation(string animationName)
+	public override async Task PlayAnimation(string animationName)
 	{
 		this.animationPlayer.Play(animationName);
 		var tcs = new TaskCompletionSource<bool>();
@@ -23,9 +23,5 @@ public partial class LoadingScene : CanvasLayer
 			}
 		};
 		await tcs.Task;
-	}
-
-	public override void _Process(double delta)
-	{
 	}
 }

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Godot;
+using Types;
 
 namespace Globals
 {
@@ -8,14 +9,18 @@ namespace Globals
         // Path to the scene which loaded firstly when the game started
         private string StartingScene = "res://UI/MainUi/main_ui.tscn";
 
+        private string LoadingScenePath = "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn";
+
+        private LoadingScene LoadingScene;
+
         // Preload the loading screne
-        private PackedScene LoadingScrene = GD.Load<PackedScene>("res://UI/LoadingScene/loading_scene.tscn");
+        private PackedScene LoadingScrene = GD.Load<PackedScene>("res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn");
 
         public static SceneManager Instance { get; private set; }
 
         private Node CurrentScene = null;
 
-        public void Initialize(string startingScenePath = "res://UI/MainUi/main_ui.tscn", string loadingScenePath = "res://UI/LoadingScene/loading_scene.tscn")
+        public void Initialize(string startingScenePath = "res://UI/MainUi/main_ui.tscn", string loadingScenePath = "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn")
         {
             // TODO: This starting Scnene should be loaded by the game manager using this scene manager, it is not a reponsibility of scene manager to load it.
 
@@ -45,16 +50,10 @@ namespace Globals
             // Disable Global Inputs
             InputManager.Instance.InputEnable = false;
 
-            LoadingScene loadingScene = (LoadingScene)LoadingScrene.Instantiate();
-
-            // Show the loading screen while loading the resources
-            GetTree().Root.CallDeferred("add_child", loadingScene);
-
-            // await until the loading scene is added to the tree
-            await ToSignal(loadingScene, "ready");
+            LoadingScene = (LoadingScene)await LoadSceneToTreeAsync(this.LoadingScenePath, GetTree().Root);
 
             // If added then play the animation
-            await loadingScene.PlayAnimation(inAnimationName);
+            await LoadingScene.PlayAnimation(inAnimationName);
 
             // If supply super node then set it
             superNode ??= GetTree().Root;
@@ -82,10 +81,10 @@ namespace Globals
             PauseScene(CurrentScene);
 
             // If the loadedScene is added to the tree then run the next animation
-            await loadingScene.PlayAnimation(outAnimationName);
+            await LoadingScene.PlayAnimation(outAnimationName);
 
             // Remove the loading scene after the new scene successfully loaded
-            GetTree().Root.CallDeferred("remove_child", loadingScene);
+            GetTree().Root.CallDeferred("remove_child", LoadingScene);
 
             // Enable Global Inputs
             InputManager.Instance.InputEnable = true;
@@ -99,7 +98,7 @@ namespace Globals
             return await Task.Run(() => GD.Load<PackedScene>(scenePath));
         }
 
-        private async Task<Node> LoadSceneToTree(string scenePath, Node rootNode)
+        private async Task<Node> LoadSceneToTreeAsync(string scenePath, Node rootNode)
         {
             var packedScene = await LoadPackedSceneAsync(scenePath);
             Node scene = packedScene.Instantiate();
@@ -108,7 +107,7 @@ namespace Globals
             // Await until the node is entered to the tree
             await ToSignal(scene, "tree_entered");
 
-            // Await until the node's _Ready method called
+            // Await until the node's _Ready method called. await until the scene is fully initialized
             await ToSignal(scene, "ready");
 
             return scene;
