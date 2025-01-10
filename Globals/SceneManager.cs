@@ -28,7 +28,7 @@ namespace Globals
             Instance = this;
             GD.Print("SceneManager Initialized");
 
-            // Remove the Game node if it exists and load the startingScene. This Game node is used as place holder to create empty 2D scene in the game.
+            // Remove the Game node if it exists and load the startingScene. This Game node is used as a placeholder to create empty 2D scene in the game.
             var _GameNode = GetNode("/root/Game");
             _GameNode?.QueueFree();
         }
@@ -71,11 +71,12 @@ namespace Globals
             // If the loadedScene is added to the tree then run the next animation
             await CurrentloadingScene.StopAnimation(outAnimationName);
 
-            // Make the Loading Screen Invisible
-            this.CurrentloadingScene.Visible = false;
 
             // Enable Global Inputs
             InputManager.Instance.InputEnable = true;
+
+            // Make the Loading Screen Invisible
+            this.CurrentloadingScene.Visible = false;
 
             // Unpause the new scene
             UnPauseScene(LoadedNewScene);
