@@ -69,14 +69,17 @@ namespace Globals
             PauseScene(LoadedNewScene);
 
             // If the loadedScene is added to the tree then run the next animation
-            await CurrentloadingScene.StopAnimation(outAnimationName);
+            if (playAnimation)
+            {
+                await CurrentloadingScene.StopAnimation(outAnimationName);
 
+                // Make the Loading Screen Invisible
+                this.CurrentloadingScene.Visible = false;
+            }
 
             // Enable Global Inputs
             InputManager.Instance.InputEnable = true;
 
-            // Make the Loading Screen Invisible
-            this.CurrentloadingScene.Visible = false;
 
             // Unpause the new scene
             UnPauseScene(LoadedNewScene);
