@@ -47,7 +47,7 @@ namespace Globals
                 this.CurrentloadingScene.Visible = true;
 
                 // If added then play the animation
-                await CurrentloadingScene.PlayAnimation(inAnimationName);
+                await CurrentloadingScene.StartAnimation(inAnimationName);
             }
 
             // if the super node is not supplied, then set it to the root node.
@@ -69,7 +69,7 @@ namespace Globals
             PauseScene(LoadedNewScene);
 
             // If the loadedScene is added to the tree then run the next animation
-            await CurrentloadingScene.PlayAnimation(outAnimationName);
+            await CurrentloadingScene.StopAnimation(outAnimationName);
 
             // Make the Loading Screen Invisible
             this.CurrentloadingScene.Visible = false;

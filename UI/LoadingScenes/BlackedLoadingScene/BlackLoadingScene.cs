@@ -12,7 +12,7 @@ public partial class BlackLoadingScene : LoadingScene
 		animationPlayer.AnimationFinished += OnAnimationFinished;
 	}
 
-	public override async Task PlayAnimation(string animationName)
+	private async Task PlayAnimation(string animationName)
 	{
 		if (_currentAnimationTask != null && !_currentAnimationTask.Task.IsCompleted)
 		{
@@ -31,5 +31,30 @@ public partial class BlackLoadingScene : LoadingScene
 		{
 			_currentAnimationTask.SetResult(true);
 		}
+	}
+
+	public override async Task StartAnimation(string animationName)
+	{
+		await PlayAnimation(animationName);
+	}
+
+	public override async Task ChangeAnimation(string animationName)
+	{
+		return;
+	}
+
+	public override async Task StopAnimation(string animationName)
+	{
+		await PlayAnimation(animationName);
+	}
+
+	public override async Task StopAnimationsNow()
+	{
+		this.animationPlayer.Stop();
+		if (_currentAnimationTask != null && !_currentAnimationTask.Task.IsCompleted)
+		{
+			_currentAnimationTask.SetResult(false);
+		}
+		await Task.CompletedTask;
 	}
 }
