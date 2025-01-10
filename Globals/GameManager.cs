@@ -25,6 +25,7 @@ namespace Globals
         {
             // TODO: This current level number should be get using the save manager.
             LevelManager.Instance.Initialized(1);
+            HUDManager.Instance.Initialize(hudScenePath: "res://UI/HUD/hud.tscn");
             SceneManager.Instance.Initialize(loadingScenePath: "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn");
         }
 
@@ -46,6 +47,7 @@ namespace Globals
 
             // Load the Main UI
             SceneManager.Instance.LoadScene("res://UI/MainUi/main_ui.tscn");
+            ChangeState(GameState.MainMenu);
         }
 
         public void ChangeState(GameState newState)
@@ -55,15 +57,19 @@ namespace Globals
             switch (newState)
             {
                 case GameState.MainMenu:
+                    MessageBus.Instance.EmitStateChanged("mainMenu");
                     // LoadScene("res://Scenes/MainMenu.tscn");
                     break;
                 case GameState.Playing:
+                    MessageBus.Instance.EmitStateChanged("playing");
                     // star the game
                     break;
                 case GameState.Paused:
+                    MessageBus.Instance.EmitStateChanged("paused");
                     GetTree().Paused = true;
                     break;
                 case GameState.GameOver:
+                    MessageBus.Instance.EmitStateChanged("gameOver");
                     // Handle game over logic
                     break;
             }
@@ -94,18 +100,10 @@ namespace Globals
             ChangeState(GameState.Playing);
         }
 
-        private void LoadScene(string scenePath)
-        {
-            var tree = GetTree();
-            tree.ChangeSceneToFile(scenePath);
-        }
-
         public void ExitGame()
         {
             GetTree().Quit();
         }
-
-        // create a level manager or scene manager. which replace the current scene from the root sceen node.
 
         public enum GameState
         {
