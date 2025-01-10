@@ -6,9 +6,9 @@ namespace Globals
 {
     public partial class SceneManager : Node
     {
-        private string LoadingScenePath;
+        private string CurrentloadingScenePath;
 
-        private LoadingScene LoadingScene;
+        private LoadingScene CurrentloadingScene;
 
         public static SceneManager Instance { get; private set; }
 
@@ -16,7 +16,7 @@ namespace Globals
 
         public void Initialize(string loadingScenePath = "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn")
         {
-            this.LoadingScenePath = loadingScenePath;
+            this.CurrentloadingScenePath = loadingScenePath;
         }
 
         public override void _Ready()
@@ -37,16 +37,17 @@ namespace Globals
 
         public async void LoadScene(string scenePath, Node superNode = null, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
         {
+            // Load the loading Scene if it is not loaded already
             await LoadTheLoadingScene();
 
             // Make the Loading Scene Visible
-            this.LoadingScene.Visible = true;
+            this.CurrentloadingScene.Visible = true;
 
             // Disable Global Inputs
             InputManager.Instance.InputEnable = false;
 
             // If added then play the animation
-            await LoadingScene.PlayAnimation(inAnimationName);
+            await CurrentloadingScene.PlayAnimation(inAnimationName);
 
             // If supply super node then set it
             superNode ??= GetTree().Root;
@@ -67,10 +68,10 @@ namespace Globals
             PauseScene(LoadedNewScene);
 
             // If the loadedScene is added to the tree then run the next animation
-            await LoadingScene.PlayAnimation(outAnimationName);
+            await CurrentloadingScene.PlayAnimation(outAnimationName);
 
             // Make the Loading Screen Invisible
-            this.LoadingScene.Visible = false;
+            this.CurrentloadingScene.Visible = false;
 
             // Enable Global Inputs
             InputManager.Instance.InputEnable = true;
@@ -105,11 +106,21 @@ namespace Globals
             rootNode.CallDeferred("remove_child", node);
         }
 
-        private async Task LoadTheLoadingScene()
+        private async Task LoadTheLoadingScene(string newLoadingScenePath = null)
         {
-            if (LoadingScene == null)
+            if (newLoadingScenePath != null && newLoadingScenePath != CurrentloadingScenePath)
             {
-                LoadingScene = (LoadingScene)await LoadSceneToTreeAsync(this.LoadingScenePath, GetTree().Root);
+                LoadingScene loadingScene = (LoadingScene)await LoadSceneToTreeAsync(newLoadingScenePath, GetTree().Root);
+                if (loadingScene != null)
+                {
+                    this.CurrentloadingScene = loadingScene;
+                    this.CurrentloadingScenePath = newLoadingScenePath;
+                    return;
+                }
+            }
+            if (CurrentloadingScene == null)
+            {
+                CurrentloadingScene = (LoadingScene)await LoadSceneToTreeAsync(this.CurrentloadingScenePath, GetTree().Root);
             }
         }
 
