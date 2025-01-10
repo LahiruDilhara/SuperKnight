@@ -12,8 +12,6 @@ namespace Globals
 
         public static SceneManager Instance { get; private set; }
 
-        private Node CurrentScene = null;
-
         public void Initialize(string loadingScenePath = "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn")
         {
             this.CurrentloadingScenePath = loadingScenePath;
@@ -35,25 +33,28 @@ namespace Globals
             _GameNode?.QueueFree();
         }
 
-        public async void LoadScene(string scenePath, Node superNode = null, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
+        public async void LoadScene(string scenePath, Node superNode = null, Node RemoveNode = null, bool playAnimation = true, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
         {
-            // Load the loading Scene if it is not loaded already
-            await LoadTheLoadingScene();
-
-            // Make the Loading Scene Visible
-            this.CurrentloadingScene.Visible = true;
-
             // Disable Global Inputs
             InputManager.Instance.InputEnable = false;
 
-            // If added then play the animation
-            await CurrentloadingScene.PlayAnimation(inAnimationName);
+            if (playAnimation)
+            {
+                // Load the loading Scene if it is not loaded already
+                await LoadTheLoadingScene();
 
-            // If supply super node then set it
+                // Make the Loading Scene Visible
+                this.CurrentloadingScene.Visible = true;
+
+                // If added then play the animation
+                await CurrentloadingScene.PlayAnimation(inAnimationName);
+            }
+
+            // if the super node is not supplied, then set it to the root node.
             superNode ??= GetTree().Root;
 
-            // clear current scene if there is any scene loaded
-            CurrentScene?.QueueFree();
+            // clear removing node if it is not null
+            RemoveNode?.QueueFree();
 
             // Run code asyncronously to load the new scene
             Node LoadedNewScene = await LoadSceneToTreeAsync(scenePath, superNode);
