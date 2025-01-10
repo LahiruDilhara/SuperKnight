@@ -103,9 +103,10 @@ namespace Globals
             return scene;
         }
 
-        private async Task RemoveSceneFromTree(Node node, Node rootNode, bool awaitUntilRemoved)
+        private async Task RemoveSceneFromTree(Node node)
         {
-            rootNode.CallDeferred("remove_child", node);
+            node.CallDeferred("queue_free");
+            await ToSignal(node, "tree_exited");
         }
 
         private async Task LoadTheLoadingScene(string newLoadingScenePath = null)
