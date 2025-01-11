@@ -132,28 +132,11 @@ namespace Globals
 
         private static void PauseScene(Node node)
         {
-            node.SetProcess(false);
-            node.SetProcessInput(false);
-            node.SetPhysicsProcess(false);
-            node.SetProcessInternal(false);
-            node.SetPhysicsProcessInternal(false);
-
-            foreach (Node subNode in node.GetChildren())
-            {
-                PauseScene(subNode);
-            }
+            node.ProcessMode = ProcessModeEnum.Disabled;
         }
         private static void UnPauseScene(Node node)
         {
-            node.SetProcess(true);
-            node.SetProcessInput(true);
-            node.SetPhysicsProcess(true);
-            node.SetProcessInternal(true);
-            node.SetPhysicsProcessInternal(true);
-            foreach (Node subNode in node.GetChildren())
-            {
-                UnPauseScene(subNode);
-            }
+            node.ProcessMode = ProcessModeEnum.Inherit;
         }
     }
 }
