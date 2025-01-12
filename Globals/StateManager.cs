@@ -9,6 +9,9 @@ namespace Globals
 
         public string CurrentState { get; private set; }
 
+        // Player score
+        public int PlayerScore = 0;
+
         public override void _Ready()
         {
             base._Ready();
@@ -44,6 +47,22 @@ namespace Globals
 
             this.CurrentState = newState;
             MessageBus.Instance.EmitStateChanged(CurrentState);
+        }
+
+        public void SetScore(int amount)
+        {
+            this.PlayerScore = amount;
+            MessageBus.Instance.EmitScoreChanged(this.PlayerScore);
+        }
+
+        public void IncreaseScore(int points)
+        {
+            PlayerScore += points;
+            MessageBus.Instance.EmitScoreChanged(PlayerScore);
+        }
+        public void ResetGame()
+        {
+            this.PlayerScore = 0;
         }
     }
 }

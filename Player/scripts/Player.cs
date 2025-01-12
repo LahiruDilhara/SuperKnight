@@ -89,7 +89,7 @@ namespace Player
 			if (pickedNode is Coin coin)
 			{
 				// If it is a coin, then increase the score
-				GameManager.Instance.IncreaseScore(coin.GetValue());
+				StateManager.Instance.IncreaseScore(coin.GetValue());
 			}
 		}
 	}

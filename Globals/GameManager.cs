@@ -9,9 +9,6 @@ namespace Globals
         // Stores the game manager singleton instance
         public static GameManager Instance { get; private set; }
 
-        // Player score
-        public int PlayerScore = 0;
-
         // This will initialize all other managers
         private void InitializeManagers()
         {
@@ -38,23 +35,6 @@ namespace Globals
 
             // Change State to Main UI
             StateManager.Instance.ChangeState(GameState.MainMenu);
-        }
-
-
-        public void SetScore(int amount)
-        {
-            this.PlayerScore = amount;
-            MessageBus.Instance.EmitScoreChanged(this.PlayerScore);
-        }
-
-        public void IncreaseScore(int points)
-        {
-            PlayerScore += points;
-            MessageBus.Instance.EmitScoreChanged(PlayerScore);
-        }
-        public void ResetGame()
-        {
-            this.PlayerScore = 0;
         }
 
         public void ExitGame()
