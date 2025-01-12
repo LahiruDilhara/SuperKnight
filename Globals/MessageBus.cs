@@ -17,6 +17,9 @@ namespace Globals
         public delegate void StateChangedEventHandler(string stateName);
 
         [Signal]
+        public delegate void ChangeStateEventHandler(string gameState);
+
+        [Signal]
         public delegate void HitpointChangedEventHandler(int currentHitpoints, int MaxHitpoints);
 
         [Signal]
@@ -71,6 +74,10 @@ namespace Globals
         public void EmitLevelReloaded(int levelNumber)
         {
             EmitSignal(nameof(this.LevelReloaded), levelNumber);
+        }
+        public void EmitChangeState(string gameState)
+        {
+            EmitSignal(nameof(this.LevelReloaded), gameState);
         }
 
         public void ConnectSignal(string signalName, Callable callable)
