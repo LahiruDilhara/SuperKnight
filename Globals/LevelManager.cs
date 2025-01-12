@@ -70,16 +70,16 @@ namespace Globals
         /// <summary>
         /// This method is responsible for reloading the current Level
         /// </summary>
-        public void ReloadLevel()
+        public async void ReloadLevel()
         {
-            SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
+            await SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
             MessageBus.Instance.EmitLevelReloaded(CurrentLevelIndex + 1);
         }
 
         /// <summary>
         /// This method is used for loading the next level. If there is no level remaining, it will sends the GameFinished signal
         /// </summary>
-        public void LoadNextLevel()
+        public async void LoadNextLevel()
         {
             var nextLevelIndex = this.CurrentLevelIndex + 1;
             if (nextLevelIndex >= this.LevelScenes.Count)
@@ -88,14 +88,14 @@ namespace Globals
                 return;
             }
             this.CurrentLevelIndex = nextLevelIndex;
-            SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
+            this.CurrentLevelScene = await SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
             MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
         }
 
         /// <summary>
         /// This method is used to load the previous level.
         /// </summary>
-        public void LoadPreviousLevel()
+        public async void LoadPreviousLevel()
         {
             var previousLevelIndex = this.CurrentLevelIndex - 1;
             if (previousLevelIndex < 0 || previousLevelIndex >= this.LevelScenes.Count)
@@ -104,7 +104,7 @@ namespace Globals
                 return;
             }
             this.CurrentLevelIndex = previousLevelIndex;
-            SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
+            this.CurrentLevelScene = await SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
             MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
         }
     }
