@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://ddngotq4kw0n"
-path="res://.godot/imported/coin.wav-8a747e89ed4020bcb22b8c6439660a48.sample"
+uid="uid://bcikrs58ucn4n"
+path="res://.godot/imported/tap.wav-af2a29efd558b6c9b40dabe0c7fc8024.sample"
 
 [deps]
 
-source_file="res://Coin/assets/sounds/coin.wav"
-dest_files=["res://.godot/imported/coin.wav-8a747e89ed4020bcb22b8c6439660a48.sample"]
+source_file="res://GameElements/Player/assets/sounds/tap.wav"
+dest_files=["res://.godot/imported/tap.wav-af2a29efd558b6c9b40dabe0c7fc8024.sample"]
 
 [params]
 

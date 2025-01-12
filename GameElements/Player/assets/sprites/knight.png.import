@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqc8btrl70pve"
-path="res://.godot/imported/coin.png-7903590d95b094e2eac53f038de2237e.ctex"
+uid="uid://88bllxa6gxim"
+path="res://.godot/imported/knight.png-6589b9c4b5d1e9aae019a8b89101d86f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Coin/assets/sprites/coin.png"
-dest_files=["res://.godot/imported/coin.png-7903590d95b094e2eac53f038de2237e.ctex"]
+source_file="res://GameElements/Player/assets/sprites/knight.png"
+dest_files=["res://.godot/imported/knight.png-6589b9c4b5d1e9aae019a8b89101d86f.ctex"]
 
 [params]
 

@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://Levels/Level1/Level1.cs" id="1_dvgif"]
 [ext_resource type="Texture2D" uid="uid://1se48xpncrh4" path="res://assets/sprites/world_tileset.png" id="2_n8m4l"]
-[ext_resource type="PackedScene" uid="uid://deyfnevy3byu" path="res://Coin/coin.tscn" id="3_moetn"]
+[ext_resource type="PackedScene" uid="uid://deyfnevy3byu" path="res://GameElements/Coin/coin.tscn" id="3_moetn"]
 [ext_resource type="PackedScene" uid="uid://gq6cvi4fephq" path="res://scene/platform.tscn" id="4_xlepu"]
 [ext_resource type="PackedScene" uid="uid://diy1xal6yv46a" path="res://scene/kill_zone.tscn" id="5_qluwu"]
-[ext_resource type="PackedScene" uid="uid://bxmm025rhtwmi" path="res://Player/player.tscn" id="6_5yxa1"]
+[ext_resource type="PackedScene" uid="uid://bxmm025rhtwmi" path="res://GameElements/Player/player.tscn" id="6_5yxa1"]
 [ext_resource type="PackedScene" uid="uid://b8h1ntnsvbxl1" path="res://scene/slime_green.tscn" id="7_i6k2f"]
 [ext_resource type="PackedScene" uid="uid://bxa50r4srtpv6" path="res://Common/Components/Damage/ContinousDamage/continous_damage.tscn" id="8_rjt6s"]
 [ext_resource type="PackedScene" uid="uid://c4grlat0ai5xu" path="res://Common/Components/Heal/ContinousRetainHeal/continous_retain_heal.tscn" id="9_ys70m"]

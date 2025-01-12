@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://deyfnevy3byu"]
 
-[ext_resource type="Script" path="res://Coin/Coin.cs" id="1_pyqbq"]
-[ext_resource type="Texture2D" uid="uid://bqc8btrl70pve" path="res://Coin/assets/sprites/coin.png" id="1_vafe3"]
+[ext_resource type="Script" path="res://GameElements/Coin/Coin.cs" id="1_pyqbq"]
+[ext_resource type="Texture2D" uid="uid://bqc8btrl70pve" path="res://GameElements/Coin/assets/sprites/coin.png" id="1_vafe3"]
 [ext_resource type="PackedScene" uid="uid://dy5idort7v1mp" path="res://Common/Components/Pickable/pickable.tscn" id="3_gc1s3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cgnew"]
