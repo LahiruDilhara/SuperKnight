@@ -77,14 +77,14 @@ namespace Globals
         }
         public void EmitChangeState(string gameState)
         {
-            EmitSignal(nameof(this.LevelReloaded), gameState);
+            EmitSignal(nameof(this.ChangeState), gameState);
         }
 
         public void ConnectSignal(string signalName, Callable callable)
         {
             if (!this.IsConnected(signalName, callable))
             {
-                this.Connect(signalName, callable);
+            this.Connect(signalName, callable);
             }
         }
         public void DisconnectSignal(string signalName, Callable callable)

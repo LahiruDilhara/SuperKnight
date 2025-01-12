@@ -26,13 +26,13 @@ namespace Globals
 
         public async void ChangeState(string newState)
         {
-
             switch (newState)
             {
                 case GameState.MainMenu:
                     await UIManager.Instance.ShowMainUI();
                     break;
                 case GameState.GamePlay:
+                    LevelManager.Instance.LoadCurrentLevel();
                     break;
                 case GameState.Paused:
                     break;
