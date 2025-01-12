@@ -10,6 +10,8 @@ namespace Globals
 
         private LoadingScene CurrentloadingScene;
 
+        private Node CurrentMainScene = null;
+
         public static SceneManager Instance { get; private set; }
 
         public void Initialize(string loadingScenePath = "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn")
@@ -33,7 +35,38 @@ namespace Globals
             _GameNode?.QueueFree();
         }
 
-        public async Task<Node> LoadScene(string scenePath, Node superNode = null, Node RemoveNode = null, bool playAnimation = true, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
+        /// <summary>
+        /// Load the main scene to root and remove the currently active mainNode
+        /// </summary>
+        /// <param name="scenePath"></param>
+        /// <param name="playAnimation"></param>
+        /// <param name="inAnimationName"></param>
+        /// <param name="outAnimationName"></param>
+        /// <returns></returns>
+        public async Task<Node> LoadMainScene(string scenePath, bool playAnimation = true, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
+        {
+            var newLoadedScene = await LoadScene(scenePath: scenePath, superNode: GetTree().Root, this.CurrentMainScene, playAnimation: playAnimation, inAnimationName: inAnimationName, outAnimationName: outAnimationName);
+            if (newLoadedScene != null)
+            {
+                this.CurrentMainScene = newLoadedScene;
+            }
+            return newLoadedScene;
+        }
+
+        /// <summary>
+        /// Load a regular node to the specified root node
+        /// </summary>
+        /// <param name="scenePath"></param>
+        /// <param name="superNode"></param>
+        /// <param name="RemoveNode"></param>
+        /// <returns></returns>
+        public async Task<Node> LoadSceneToNode(string scenePath, Node superNode, Node RemoveNode = null)
+        {
+            if (superNode == null) return null;
+            return await LoadScene(scenePath: scenePath, superNode: superNode, RemoveNode: RemoveNode, playAnimation: false);
+        }
+
+        private async Task<Node> LoadScene(string scenePath, Node superNode = null, Node RemoveNode = null, bool playAnimation = true, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
         {
             // Disable Global Inputs
             InputManager.Instance.InputEnable = false;
@@ -49,9 +82,6 @@ namespace Globals
                 // If added then play the animation
                 await CurrentloadingScene.StartAnimation(inAnimationName);
             }
-
-            // if the super node is not supplied, then set it to the root node.
-            superNode ??= GetTree().Root;
 
             // clear removing node if it is not null
             RemoveNode?.QueueFree();
@@ -80,11 +110,10 @@ namespace Globals
             // Enable Global Inputs
             InputManager.Instance.InputEnable = true;
 
-
             // Unpause the new scene
             UnPauseScene(LoadedNewScene);
 
-            return CurrentloadingScene;
+            return LoadedNewScene;
         }
 
         private static async Task<PackedScene> LoadPackedSceneAsync(string scenePath)

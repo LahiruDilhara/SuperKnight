@@ -63,7 +63,7 @@ namespace Globals
             var levelScenePath = LevelScenes[LevelIndex];
             CurrentLevelIndex = LevelIndex;
 
-            CurrentLevelScene = await SceneManager.Instance.LoadScene(levelScenePath, RemoveNode: removeNode);
+            CurrentLevelScene = await SceneManager.Instance.LoadMainScene(levelScenePath);
             MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
         }
 
@@ -72,7 +72,7 @@ namespace Globals
         /// </summary>
         public async void ReloadLevel()
         {
-            await SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
+            await SceneManager.Instance.LoadMainScene(LevelScenes[CurrentLevelIndex]);
             MessageBus.Instance.EmitLevelReloaded(CurrentLevelIndex + 1);
         }
 
@@ -88,7 +88,7 @@ namespace Globals
                 return;
             }
             this.CurrentLevelIndex = nextLevelIndex;
-            this.CurrentLevelScene = await SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
+            this.CurrentLevelScene = await SceneManager.Instance.LoadMainScene(LevelScenes[CurrentLevelIndex]);
             MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
         }
 
@@ -104,7 +104,7 @@ namespace Globals
                 return;
             }
             this.CurrentLevelIndex = previousLevelIndex;
-            this.CurrentLevelScene = await SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
+            this.CurrentLevelScene = await SceneManager.Instance.LoadMainScene(LevelScenes[CurrentLevelIndex]);
             MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
         }
 
