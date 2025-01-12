@@ -12,9 +12,9 @@ namespace Globals
 
         private List<string> LevelScenes = new List<string> { "res://Levels/Level1/Level1.tscn" };
 
-        private Level CurrentLevelScene = null;
+        private Level CurrentLevel = null;
 
-        public int CurrentLevel
+        public int CurrentLevelNumber
         {
             get => this.CurrentLevelIndex + 1;
         }
@@ -63,8 +63,8 @@ namespace Globals
             var levelScenePath = LevelScenes[LevelIndex];
             CurrentLevelIndex = LevelIndex;
 
-            CurrentLevelScene = await SceneManager.Instance.LoadMainScene<Level>(levelScenePath);
-            MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
+            CurrentLevel = await SceneManager.Instance.LoadMainScene<Level>(levelScenePath);
+            MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1, CurrentLevel);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Globals
         public async void ReloadLevel()
         {
             await SceneManager.Instance.LoadMainScene<Level>(LevelScenes[CurrentLevelIndex]);
-            MessageBus.Instance.EmitLevelReloaded(CurrentLevelIndex + 1);
+            MessageBus.Instance.EmitLevelReloaded(CurrentLevelIndex + 1, CurrentLevel);
         }
 
         /// <summary>
@@ -88,8 +88,8 @@ namespace Globals
                 return;
             }
             this.CurrentLevelIndex = nextLevelIndex;
-            this.CurrentLevelScene = await SceneManager.Instance.LoadMainScene<Level>(LevelScenes[CurrentLevelIndex]);
-            MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
+            this.CurrentLevel = await SceneManager.Instance.LoadMainScene<Level>(LevelScenes[CurrentLevelIndex]);
+            MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1, CurrentLevel);
         }
 
         /// <summary>
@@ -104,23 +104,23 @@ namespace Globals
                 return;
             }
             this.CurrentLevelIndex = previousLevelIndex;
-            this.CurrentLevelScene = await SceneManager.Instance.LoadMainScene<Level>(LevelScenes[CurrentLevelIndex]);
-            MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
+            this.CurrentLevel = await SceneManager.Instance.LoadMainScene<Level>(LevelScenes[CurrentLevelIndex]);
+            MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1, CurrentLevel);
         }
 
         public void PauseCurrentLevel()
         {
-            if (CurrentLevelScene != null)
+            if (CurrentLevel != null)
             {
-                this.CurrentLevelScene.ProcessMode = ProcessModeEnum.Disabled;
+                this.CurrentLevel.ProcessMode = ProcessModeEnum.Disabled;
             }
         }
 
         public void ResumeCurrentLevel()
         {
-            if (CurrentLevelScene != null)
+            if (CurrentLevel != null)
             {
-                this.CurrentLevelScene.ProcessMode = ProcessModeEnum.Inherit;
+                this.CurrentLevel.ProcessMode = ProcessModeEnum.Inherit;
             }
         }
     }
