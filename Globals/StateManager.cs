@@ -20,6 +20,8 @@ namespace Globals
             }
             Instance = this;
             GD.Print("StateManager Initialized");
+
+            MessageBus.Instance.ConnectSignal(nameof(MessageBus.Instance.ChangeState), new Callable(this, nameof(this.ChangeState)));
         }
 
         public async void ChangeState(string newState)

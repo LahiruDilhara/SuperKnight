@@ -1,6 +1,7 @@
 using Globals;
 using Godot;
 using System;
+using Types;
 
 public partial class MainUi : Control
 {
@@ -24,7 +25,7 @@ public partial class MainUi : Control
 
 	private void OnStart()
 	{
-		LevelManager.Instance.LoadCurrentLevel(removeNode: this);
+		MessageBus.Instance.EmitChangeState(GameState.GamePlay);
 	}
 
 	private void OnExit()
