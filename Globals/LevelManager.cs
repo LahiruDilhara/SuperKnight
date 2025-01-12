@@ -107,5 +107,21 @@ namespace Globals
             this.CurrentLevelScene = await SceneManager.Instance.LoadScene(LevelScenes[CurrentLevelIndex]);
             MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1);
         }
+
+        public void PauseCurrentLevel()
+        {
+            if (CurrentLevelScene != null)
+            {
+                this.CurrentLevelScene.ProcessMode = ProcessModeEnum.Disabled;
+            }
+        }
+
+        public void ResumeCurrentLevel()
+        {
+            if (CurrentLevelScene != null)
+            {
+                this.CurrentLevelScene.ProcessMode = ProcessModeEnum.Inherit;
+            }
+        }
     }
 }
