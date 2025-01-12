@@ -25,7 +25,6 @@ namespace Globals
         {
             // TODO: This current level number should be get using the save manager.
             LevelManager.Instance.Initialized(1);
-            HUDManager.Instance.Initialize(hudScenePath: "res://UI/HUD/hud.tscn");
             SceneManager.Instance.Initialize(loadingScenePath: "res://UI/LoadingScenes/BlackedLoadingScene/blackLoadingScene.tscn");
         }
 
@@ -46,11 +45,10 @@ namespace Globals
             InitializeManagers();
 
             // Load the Main UI
-            SceneManager.Instance.LoadScene("res://UI/MainUi/main_ui.tscn");
             ChangeState(GameState.MainMenu);
         }
 
-        public void ChangeState(GameState newState)
+        public async void ChangeState(GameState newState)
         {
             this.CurrentState = newState;
 
@@ -58,6 +56,7 @@ namespace Globals
             {
                 case GameState.MainMenu:
                     MessageBus.Instance.EmitStateChanged("mainMenu");
+                    await SceneManager.Instance.LoadScene("res://UI/MainUi/main_ui.tscn");
                     // LoadScene("res://Scenes/MainMenu.tscn");
                     break;
                 case GameState.Playing:
