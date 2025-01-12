@@ -43,14 +43,14 @@ namespace Globals
         /// <param name="inAnimationName"></param>
         /// <param name="outAnimationName"></param>
         /// <returns></returns>
-        public async Task<Node> LoadMainScene(string scenePath, bool playAnimation = true, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
+        public async Task<T> LoadMainScene<T>(string scenePath, bool playAnimation = true, string inAnimationName = "fade_in", string outAnimationName = "fade_out") where T : Node
         {
             var newLoadedScene = await LoadScene(scenePath: scenePath, superNode: GetTree().Root, this.CurrentMainScene, playAnimation: playAnimation, inAnimationName: inAnimationName, outAnimationName: outAnimationName);
             if (newLoadedScene != null)
             {
                 this.CurrentMainScene = newLoadedScene;
             }
-            return newLoadedScene;
+            return (T)newLoadedScene;
         }
 
         /// <summary>
@@ -60,10 +60,10 @@ namespace Globals
         /// <param name="superNode"></param>
         /// <param name="RemoveNode"></param>
         /// <returns></returns>
-        public async Task<Node> LoadSceneToNode(string scenePath, Node superNode, Node RemoveNode = null)
+        public async Task<T> LoadSceneToNode<T>(string scenePath, Node superNode, Node RemoveNode = null) where T : Node
         {
             if (superNode == null) return null;
-            return await LoadScene(scenePath: scenePath, superNode: superNode, RemoveNode: RemoveNode, playAnimation: false);
+            return (T)await LoadScene(scenePath: scenePath, superNode: superNode, RemoveNode: RemoveNode, playAnimation: false);
         }
 
         private async Task<Node> LoadScene(string scenePath, Node superNode = null, Node RemoveNode = null, bool playAnimation = true, string inAnimationName = "fade_in", string outAnimationName = "fade_out")

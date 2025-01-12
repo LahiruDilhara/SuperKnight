@@ -31,7 +31,7 @@ namespace Globals
         {
             if (UIScenePaths.ContainsKey("mainUI"))
             {
-                return await SceneManager.Instance.LoadMainScene(UIScenePaths["mainUI"]);
+                return await SceneManager.Instance.LoadMainScene<Node>(UIScenePaths["mainUI"]);
             }
             return null;
         }
