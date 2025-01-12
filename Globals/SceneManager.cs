@@ -33,7 +33,7 @@ namespace Globals
             _GameNode?.QueueFree();
         }
 
-        public async void LoadScene(string scenePath, Node superNode = null, Node RemoveNode = null, bool playAnimation = true, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
+        public async Task<Node> LoadScene(string scenePath, Node superNode = null, Node RemoveNode = null, bool playAnimation = true, string inAnimationName = "fade_in", string outAnimationName = "fade_out")
         {
             // Disable Global Inputs
             InputManager.Instance.InputEnable = false;
@@ -62,7 +62,7 @@ namespace Globals
             if (LoadedNewScene == null)
             {
                 GD.PrintErr($"Failed to load the scene: ${scenePath}");
-                return;
+                return null;
             }
 
             // Disable the new scene's processing and animations temporarily
@@ -83,6 +83,8 @@ namespace Globals
 
             // Unpause the new scene
             UnPauseScene(LoadedNewScene);
+
+            return CurrentloadingScene;
         }
 
         private static async Task<PackedScene> LoadPackedSceneAsync(string scenePath)
