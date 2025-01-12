@@ -9,6 +9,10 @@ namespace Globals
         public static MessageBus Instance { get; private set; }
 
         // Signals for global events
+        /// <summary>
+        /// There are states like gamePlay, paused, gameOver
+        /// </summary>
+        /// <param name="stateName"></param>
         [Signal]
         public delegate void StateChangedEventHandler(string stateName);
 
