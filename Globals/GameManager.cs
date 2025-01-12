@@ -12,12 +12,6 @@ namespace Globals
         // Player score
         public int PlayerScore = 0;
 
-        // Player current Hitpoints
-        public int PlayerCurrentHitpoints = 2500;
-
-        // Player Max Hitpoints
-        public int PlayerMaxHitpoints { get; private set; } = 2500;
-
         // This will initialize all other managers
         private void InitializeManagers()
         {
@@ -53,12 +47,6 @@ namespace Globals
             MessageBus.Instance.EmitScoreChanged(this.PlayerScore);
         }
 
-        public void SetCurrentHitpoints(int currentHitpoints)
-        {
-            this.PlayerCurrentHitpoints = currentHitpoints;
-            MessageBus.Instance.EmitHitpointChanged(currentHitpoints, this.PlayerMaxHitpoints);
-        }
-
         public void IncreaseScore(int points)
         {
             PlayerScore += points;
@@ -66,8 +54,6 @@ namespace Globals
         }
         public void ResetGame()
         {
-            this.PlayerCurrentHitpoints = 2500;
-            this.PlayerMaxHitpoints = 2500;
             this.PlayerScore = 0;
         }
 

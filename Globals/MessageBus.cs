@@ -33,6 +33,9 @@ namespace Globals
         public delegate void LevelChangedEventHandler(int levelNumber, Level level);
 
         [Signal]
+        public delegate void LevelStateChangedEventHandler(Level level);
+
+        [Signal]
         public delegate void LevelReloadedEventHandler(int levelNumber, Level level);
 
         public override void _Ready()
@@ -75,6 +78,10 @@ namespace Globals
         public void EmitLevelReloaded(int levelNumber, Level level)
         {
             EmitSignal(nameof(this.LevelReloaded), levelNumber, level);
+        }
+        public void EmitLevelStateChanged(Level level)
+        {
+            EmitSignal(nameof(this.LevelStateChanged), level);
         }
         public void EmitChangeState(string gameState)
         {

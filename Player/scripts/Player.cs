@@ -2,6 +2,7 @@ using Components;
 using Globals;
 using Godot;
 using System;
+using Types;
 
 namespace Player
 {
@@ -32,10 +33,6 @@ namespace Player
 			this.hitbox = GetNode<Hitbox>("Hitbox");
 			this.picableCollector = GetNode<PicableCollector>("PicableCollector");
 
-
-			// Initialize the Hitpoint component
-			this.hitpoint.Initialize(GameManager.Instance.PlayerMaxHitpoints);
-
 			// Connect with signals
 			// Connect with hitpoint component hitpoint change signal
 			if (!hitpoint.IsConnected(nameof(hitpoint.HitpointChange), new Callable(this, nameof(this.OnHitpointChange))))
@@ -52,12 +49,15 @@ namespace Player
 			{
 				picableCollector.Connect(nameof(picableCollector.Picked), new Callable(this, nameof(this.OnPick)));
 			}
+			// Connect the MessageBus LevelStateChanged Signal
+			MessageBus.Instance.ConnectSignal(nameof(MessageBus.Instance.LevelStateChanged), new Callable(this, nameof(OnLevelStateChange)));
 
 			stateMachine.Initialize(character: this, Animation: Animation);
 		}
-		public void Initialize()
+		public void OnLevelStateChange(Level level)
 		{
-
+			// When level state changed, reinitialized the player hitpoints
+			this.hitpoint.Initialize(level.PlayerMaxHitpoints);
 		}
 
 		public override void _PhysicsProcess(double delta)
@@ -78,7 +78,7 @@ namespace Player
 		// Signal Handlers
 		private void OnHitpointChange(int currentHitpoint)
 		{
-			GameManager.Instance.SetCurrentHitpoints(currentHitpoint);
+			MessageBus.Instance.EmitHitpointChanged(currentHitpoint, this.hitpoint.MaxHitpoints);
 		}
 		private void OnDead()
 		{

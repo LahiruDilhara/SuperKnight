@@ -1,9 +1,16 @@
+using Globals;
 using Godot;
 
 namespace Types
 {
     public partial class Level : Node
     {
-        protected int PlayerMaxHitpoints = 0;
+        public int PlayerMaxHitpoints { get; protected set; }
+
+        public override void _Ready()
+        {
+            base._Ready();
+            MessageBus.Instance.EmitLevelStateChanged(this);
+        }
     }
 }
