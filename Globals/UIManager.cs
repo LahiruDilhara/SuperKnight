@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Godot;
 
 namespace Globals
@@ -26,12 +27,13 @@ namespace Globals
             GD.Print("UIManager Initialized");
         }
 
-        public async void ShowMainUI()
+        public async Task<Node> ShowMainUI()
         {
             if (UIScenePaths.ContainsKey("mainUI"))
             {
-                await SceneManager.Instance.LoadScene(UIScenePaths["mainUI"]);
+                return await SceneManager.Instance.LoadScene(UIScenePaths["mainUI"]);
             }
+            return null;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Threading;
 using Godot;
+using Types;
 
 namespace Globals
 {
@@ -7,9 +8,6 @@ namespace Globals
     {
         // Stores the game manager singleton instance
         public static GameManager Instance { get; private set; }
-
-        // Store the current state of the game
-        public GameState CurrentState { get; private set; }
 
         // Player score
         public int PlayerScore = 0;
@@ -44,35 +42,10 @@ namespace Globals
 
             InitializeManagers();
 
-            // Load the Main UI
-            ChangeState(GameState.MainMenu);
+            // Change State to Main UI
+            StateManager.Instance.ChangeState(GameState.MainMenu);
         }
 
-        public async void ChangeState(GameState newState)
-        {
-            this.CurrentState = newState;
-
-            switch (newState)
-            {
-                case GameState.MainMenu:
-                    MessageBus.Instance.EmitStateChanged("mainMenu");
-                    await SceneManager.Instance.LoadScene("res://UI/MainUi/main_ui.tscn");
-                    // LoadScene("res://Scenes/MainMenu.tscn");
-                    break;
-                case GameState.Playing:
-                    MessageBus.Instance.EmitStateChanged("playing");
-                    // star the game
-                    break;
-                case GameState.Paused:
-                    MessageBus.Instance.EmitStateChanged("paused");
-                    GetTree().Paused = true;
-                    break;
-                case GameState.GameOver:
-                    MessageBus.Instance.EmitStateChanged("gameOver");
-                    // Handle game over logic
-                    break;
-            }
-        }
 
         public void SetScore(int amount)
         {
@@ -96,20 +69,11 @@ namespace Globals
             this.PlayerCurrentHitpoints = 2500;
             this.PlayerMaxHitpoints = 2500;
             this.PlayerScore = 0;
-            ChangeState(GameState.Playing);
         }
 
         public void ExitGame()
         {
             GetTree().Quit();
-        }
-
-        public enum GameState
-        {
-            MainMenu,
-            Playing,
-            Paused,
-            GameOver
         }
     }
 }

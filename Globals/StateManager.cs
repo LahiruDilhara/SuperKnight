@@ -5,7 +5,7 @@ namespace Globals
 {
     public partial class StateManager : Node
     {
-        public StateManager Instance { get; private set; }
+        public static StateManager Instance { get; private set; }
 
         public string CurrentState { get; private set; }
 
@@ -24,11 +24,11 @@ namespace Globals
 
         public async void ChangeState(string newState)
         {
-            this.CurrentState = newState;
 
             switch (newState)
             {
                 case GameState.MainMenu:
+                    await UIManager.Instance.ShowMainUI();
                     break;
                 case GameState.GamePlay:
                     break;
@@ -36,7 +36,12 @@ namespace Globals
                     break;
                 case GameState.GameOver:
                     break;
+                default:
+                    return;
             }
+
+            this.CurrentState = newState;
+            MessageBus.Instance.EmitStateChanged(CurrentState);
         }
     }
 }

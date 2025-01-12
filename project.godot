@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 MessageBus="*res://Globals/MessageBus.cs"
 SceneManager="*res://Globals/SceneManager.cs"
 InputManager="*res://Globals/InputManager.cs"
+UiManager="*res://Globals/UIManager.cs"
 LevelManager="*res://Globals/LevelManager.cs"
 StateManager="*res://Globals/StateManager.cs"
 GameManager="*res://Globals/GameManager.cs"
