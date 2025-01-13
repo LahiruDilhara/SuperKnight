@@ -10,7 +10,6 @@ namespace Types
         public override void _Ready()
         {
             base._Ready();
-            MessageBus.Instance.EmitLevelStateChanged(this);
         }
     }
 }

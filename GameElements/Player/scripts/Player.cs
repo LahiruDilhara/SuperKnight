@@ -49,15 +49,8 @@ namespace Player
 			{
 				picableCollector.Connect(nameof(picableCollector.Picked), new Callable(this, nameof(this.OnPick)));
 			}
-			// Connect the MessageBus LevelStateChanged Signal
-			MessageBus.Instance.ConnectSignal(nameof(MessageBus.Instance.LevelStateChanged), new Callable(this, nameof(OnLevelStateChange)));
 
 			stateMachine.Initialize(character: this, Animation: Animation);
-		}
-		public void OnLevelStateChange(Level level)
-		{
-			// When level state changed, reinitialized the player hitpoints
-			this.hitpoint.Initialize(level.PlayerMaxHitpoints);
 		}
 
 		public override void _PhysicsProcess(double delta)
