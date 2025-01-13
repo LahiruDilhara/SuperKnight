@@ -12,7 +12,7 @@ namespace Globals
 
         private List<string> LevelScenes = new List<string> { "res://Levels/Level1/Level1.tscn" };
 
-        private Level CurrentLevel = null;
+        private Level.Level CurrentLevel = null;
 
         public int CurrentLevelNumber
         {
@@ -63,7 +63,7 @@ namespace Globals
             var levelScenePath = LevelScenes[LevelIndex];
             CurrentLevelIndex = LevelIndex;
 
-            CurrentLevel = await SceneManager.Instance.LoadMainScene<Level>(levelScenePath);
+            CurrentLevel = await SceneManager.Instance.LoadMainScene<Level.Level>(levelScenePath);
             MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1, CurrentLevel);
         }
 
@@ -72,7 +72,7 @@ namespace Globals
         /// </summary>
         public async void ReloadLevel()
         {
-            await SceneManager.Instance.LoadMainScene<Level>(LevelScenes[CurrentLevelIndex]);
+            await SceneManager.Instance.LoadMainScene<Level.Level>(LevelScenes[CurrentLevelIndex]);
             MessageBus.Instance.EmitLevelReloaded(CurrentLevelIndex + 1, CurrentLevel);
         }
 
@@ -88,7 +88,7 @@ namespace Globals
                 return;
             }
             this.CurrentLevelIndex = nextLevelIndex;
-            this.CurrentLevel = await SceneManager.Instance.LoadMainScene<Level>(LevelScenes[CurrentLevelIndex]);
+            this.CurrentLevel = await SceneManager.Instance.LoadMainScene<Level.Level>(LevelScenes[CurrentLevelIndex]);
             MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1, CurrentLevel);
         }
 
@@ -104,7 +104,7 @@ namespace Globals
                 return;
             }
             this.CurrentLevelIndex = previousLevelIndex;
-            this.CurrentLevel = await SceneManager.Instance.LoadMainScene<Level>(LevelScenes[CurrentLevelIndex]);
+            this.CurrentLevel = await SceneManager.Instance.LoadMainScene<Level.Level>(LevelScenes[CurrentLevelIndex]);
             MessageBus.Instance.EmitLevelChanged(CurrentLevelIndex + 1, CurrentLevel);
         }
 

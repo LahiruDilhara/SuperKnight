@@ -23,6 +23,13 @@ namespace Player
 		private Hitbox hitbox;
 		private PicableCollector picableCollector;
 
+		// This method is used to initialize the player
+		public void Initialize(int playerMaxHitpoints)
+		{
+			// Initialize the hitpoint component with the given player max hitpoints
+			this.hitpoint.Initialize(playerMaxHitpoints);
+		}
+
 		public override void _Ready()
 		{
 			base._Ready();

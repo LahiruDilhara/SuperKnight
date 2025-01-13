@@ -1,6 +1,6 @@
 using Godot;
 using System;
-using Types;
+using Level;
 
 namespace Globals
 {
@@ -30,10 +30,10 @@ namespace Globals
         public delegate void GameFinishedEventHandler();
 
         [Signal]
-        public delegate void LevelChangedEventHandler(int levelNumber, Level level);
+        public delegate void LevelChangedEventHandler(int levelNumber, Level.Level level);
 
         [Signal]
-        public delegate void LevelReloadedEventHandler(int levelNumber, Level level);
+        public delegate void LevelReloadedEventHandler(int levelNumber, Level.Level level);
 
         public override void _Ready()
         {
@@ -68,11 +68,11 @@ namespace Globals
         {
             EmitSignal(nameof(this.GameFinished));
         }
-        public void EmitLevelChanged(int levelNumber, Level level)
+        public void EmitLevelChanged(int levelNumber, Level.Level level)
         {
             EmitSignal(nameof(this.LevelChanged), levelNumber, level);
         }
-        public void EmitLevelReloaded(int levelNumber, Level level)
+        public void EmitLevelReloaded(int levelNumber, Level.Level level)
         {
             EmitSignal(nameof(this.LevelReloaded), levelNumber, level);
         }
